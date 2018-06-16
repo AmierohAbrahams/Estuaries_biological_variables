@@ -1,0 +1,254 @@
+---
+title: "Assessing the ecological role of Isolepis digitata Schrad. along the Krom River, Cedarberg, Western Cape"
+author: "Amieroh, Kim and Yameen"
+date: "14 June 2018"
+output:
+  word_document:
+    toc: yes
+  html_document:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 5
+    highlight: default
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 6
+    highlight: zenburn
+    latex_engine: xelatex
+mainfont: PT Serif
+monofont: PT Mono
+language: Australian
+sansfont: PT Sans
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A very rough, very basic start.
+
+
+## Introduction:
+
+Submerged macrophytes are aquatic plants with vegetative structures that are predominantly submerged and are integral to the ecological functioning of aquatic environments. They function as producers, are important sources of food and refuge, provide habitats for aquatic invertebrates, zooplankton and fish. In addition to this they alter water movement, sediment and nutrient dynamics. The distribution of macrophytes is determined by abiotic factors such as depth, nutrients, sediment type, pH and most importantly light. The submerged macrophyte, Isolepis, belongs to the sedge family Cyperaceae and consists of annuals and short-lived perennial plants having a grass-like appearance. Isolepis digitata is a tufted perennial with minute roots, ascending whitish rhizomes and green leaves. The genus Isolepis is well represented in South Africa with Isolepis digitata being endemic to the Cape region having its highest abundance in the winter months. It is found between Clanwilliam and Riversdale in the Western Cape in fast flowing streams, forming dense clusters on rock surfaces and flowers between September and January3. Very little is known about of this species, therefore this study focuses on Isolepis digitata and describes its morphology and the ecological role in relation to the environmental characteristics.
+
+## Aim
+To understand the role and autecology of Isolepis digitata along the Krom River.  The objectives are as follows:
+To determine the effect of physical parameters on the morphology of Isolepis digitata. This will be done by assessing whether temperature, salinity and pH has an influence on the amount of rhizomes present or if these variables influence the biomass. To assess whether pH varies with depth.
+
+## Methods 
+
+Physical parameters including temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%) was measured using a multi-parameter Aquaprobe at each point along the river where Isolepis digitata samples were removed.
+The target species was collected from each site at two depths (n=5 for each depth). Depths between 21- 36 cm was classified as deep and depths between 10-20 cm was classified as shallow. The number of rhizomes, the culm length (top of the soil to the tip of the plant) for five individual culms and the number of spikelets were measured for each sample. To determine the response of biomass to different environmental conditions, the total biomass of each sample was recorded with the roots and culms being separated and weighed individually for each sample. 
+The amount of organic content stored in each sample was measured by combustion using an ashing oven to reflect the role of this species for carbon storage.  The aquatic invertebrates that were present on each sample was collected in the field and preserved in ethanol to represent the role of this species as a refugia for animals.
+
+## Statistical analyses
+
+A correlation matrix was constructed using R statistical software to correlate each of the biological variables (number of rhizomes, culm length and total biomass) to each of the physical variables (temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%)). A single factor ANOVA test was included to compare the biomass of samples at deep and shallow depths between sites....... we need to add more to this (A.A)
+
+## Data analysis
+```{r}
+library(tidyverse)
+library(Hmisc)
+library(corrplot)
+library(ggplot2)
+library(knitr)
+library(tidyverse)
+library(rmarkdown)
+library(ggpubr)
+library(ggmap)
+library(plot3D)
+library(dplyr)
+library(ggpubr)
+library(devtools)
+library(ggsn)
+library(ggthemes)
+```
+
+Loading the data
+```{r}
+R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
+```
+
+Creating a correlation matrix between each of the variables: To assess the relationship between each of the variables
+```{r}
+# This correlation plot gives the P and N values
+# I dont know if we want to consider the P and N values but the correlation is the first block of numbers
+res2 <- rcorr(as.matrix(R_assignment_AJ_, use = "complete obs"))
+res2
+```
+
+```{r}
+try1 <- cor(R_assignment_AJ_, use = "complete.obs")
+try1
+
+# Making a visualisation
+corrplot(try1)
+
+# This visualisation 
+#The function corrplot() takes the correlation matrix as the first argument. 
+#The second argument (type=“upper”) is used to display only the upper triangular of the correlation matrix.
+corrplot(try1, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+```
+ 
+Other analysis to assess whether pH varies with depth
+
+Themes for graphs
+```{r}
+
+theme_AJMS <- function(AfricanJournalOfMarineScience) {
+  theme(
+    panel.background = element_rect(fill = NA),
+    panel.border = element_rect(size = 0.4, fill = NA),
+    text = element_text(family = "Arial"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    axis.title = element_text(size = 9),
+    axis.ticks = element_line(size = 0.5),
+    legend.position = "right",
+    legend.direction = "vertical",
+    legend.title = element_text(family = "Arial", size = 9),
+    legend.text = element_text(family = "Arial", size = 9),
+    legend.key = element_blank(),
+    legend.key.height = unit(.3, "cm"),
+    legend.box.spacing = unit(0.4, "cm"),
+    legend.background = element_blank(),
+    plot.title = element_text(size = 9, hjust = 0),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 9),
+    axis.ticks.length = unit(-0.2, "cm"),
+    axis.text.x = element_text(margin = unit(c(0.25, 0.5, 0.5, 0.5), "cm"), vjust = 0.35, angle = 450),
+    axis.text.y = element_text(margin = unit(c(0.5, 0.3, 0.5, 0.5), "cm"))
+  )
+}
+```
+
+Possible code for mapping of the cederberg area (A.A)
+```{r}
+mapping_plot <- function(df){
+  mapping <- df %>% 
+ggplot(aes(x = lon, y = lat)) +
+  geom_polygon(data = south_africa_coast, aes(group = group), fill = "grey70") +
+  coord_cartesian(xlim = c(12, 36), ylim = c(-38, -26)) +
+  geom_path(data = sa_provinces, aes(group = group)) +
+  geom_point(data = df)  +
+  geom_label_repel(data =df, aes(x = lon, y = lat, label = site), 
+                   size = 3, box.padding = 2, nudge_x = -0.5, nudge_y = 0.2, segment.alpha = 0.4) +
+  theme(axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank())
+  return(mapping)
+}
+```
+
+Or we could use google map version to plot the region (A.A)
+This is not co-ordinates-Need to find the proper co-ordinates
+```{r}
+map1<- get_map(location = c(lon = 18.895099, lat = -34.362008),
+                      zoom = 10, maptype = 'satellite')
+
+ggmap(map1) +
+  geom_point(data = co_ordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Latitude", y = "Longitude", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+trial1 <- ggmap(map1) +
+  geom_point(data = co_ordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+new1 <- trial1 +
+  geom_text(data = co_ordinates, aes(lon+0.0135, lat-0.0045, label = Site),
+            hjust = 1.05, vjust = 0.7,
+            size = 3, colour = "white")
+```
+
+Some very basic analysis to get the project started (A.A)
+
+```{r}
+ggplot(data = R_assignment_AJ_, aes(x = Depth, y = pH)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+```
+
+```{r}
+ggplot(data = R_assignment_AJ_, aes(x = Depth, y = Salinity)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+```
+
+```{r}
+dat1 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.pH = mean(pH),
+            sd.pH = sd(pH))
+
+ggplot(dat1, aes(x = Site, y = mn.pH)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.pH - sd.pH, 
+                    ymax = mn.pH + sd.pH)) +
+  labs(x = "Site", y = "Average pH") +
+  theme_AJMS()
+```
+```{r}
+dat1 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Salinity = mean(Salinity),
+            sd.Salinity = sd(Salinity))
+
+ggplot(dat1, aes(x = Site, y = mn.Salinity)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Salinity - sd.Salinity, 
+                    ymax = mn.Salinity + sd.Salinity)) +
+  labs(x = "Site", y = "Average Salinity") +
+  theme_AJMS()
+```
+
+```{r}
+Anova1 <- aov(pH~Site,data = R_assignment_AJ_)
+summary(Anova1)
+```
+
+```{r}
+Anova1 <- aov(Temperature~Site,data = R_assignment_AJ_)
+summary(Anova1)
+```
+
+```{r}
+ggplot(data = R_assignment_AJ_, aes(x = Temperature, y = Salinity)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+```
+
+Consider doing other analysis that were not used in R or biostats class.....
+
+```{r}
+ggplot(data = R_assignment_AJ_, aes(x = Site, y = rhizomes)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+```
+
+
+ Need statistical analysis
+ 
+
+
+
+
+
+
+
+
+
