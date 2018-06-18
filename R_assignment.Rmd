@@ -45,10 +45,8 @@ library(ggpubr)
 library(ggmap)
 library(dplyr)
 library(ggpubr)
-library(devtools)
-library(ggsn)
-library(ggthemes)
-library(e1071)
+library(ggmap)
+library(ggrepel)
 ```
 
 A very rough, very basic start.
@@ -119,30 +117,39 @@ ggplot(aes(x = lon, y = lat)) +
   coord_cartesian(xlim = c(12, 36), ylim = c(-38, -26)) +
   geom_path(data = sa_provinces, aes(group = group)) +
   geom_point(data = df)  +
-  geom_label_repel(data =df, aes(x = lon, y = lat, label = site), 
+  geom_label_repel(data =df, aes(x = lon, y = lat, label = Site), 
                    size = 3, box.padding = 2, nudge_x = -0.5, nudge_y = 0.2, segment.alpha = 0.4) +
   theme(axis.title = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank())
   return(mapping)
 }
+
+map_1 <- mapping_plot(df = Map_coordinates)
+map_1
 ```
 
 Or we could use google map version to plot the region (A.A)
 This is not co-ordinates-Need to find the proper co-ordinates
+```{r}
+# LOading map co-odinates
+Map_coordinates <- read_csv("Map_coordinates.csv")
+```
+
+
 ```{r map_plot, include=TRUE}
-map1<- get_map(location = c(lon = 18.895099, lat = -34.362008),
+map1<- get_map(location = c(lon = 19.895099, lat = -34.362008),
                       zoom = 10, maptype = 'satellite')
 
 ggmap(map1) +
-  geom_point(data = co_ordinates, aes(x = lon+0.002, y = lat-0.007),
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
              colour = "red", size = 1.5) +
   labs(x = "Latitude", y = "Longitude", title = "Map showing the Cederberg region") +
   theme(plot.title = element_text(hjust = 0.5))
 
 
 trial1 <- ggmap(map1) +
-  geom_point(data = co_ordinates, aes(x = lon+0.002, y = lat-0.007),
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
              colour = "red", size = 1.5) +
   labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
   theme(plot.title = element_text(hjust = 0.5))
@@ -150,7 +157,7 @@ trial1 <- ggmap(map1) +
 
 
 new1 <- trial1 +
-  geom_text(data = co_ordinates, aes(lon+0.0135, lat-0.0045, label = Site),
+  geom_text(data = Map_coordinates, aes(lon+0.0135, lat-0.0045, label = Site),
             hjust = 1.05, vjust = 0.7,
             size = 3, colour = "white")
 ```
