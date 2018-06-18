@@ -27,8 +27,28 @@ sansfont: PT Sans
 fontsize: 12pt
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r prelim_opts, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "R>",
+  warning = FALSE,
+  message = FALSE
+)
+
+library(tidyverse)
+library(Hmisc)
+library(corrplot)
+library(ggplot2)
+library(knitr)
+library(tidyverse)
+library(rmarkdown)
+library(ggpubr)
+library(ggmap)
+library(dplyr)
+library(ggpubr)
+library(devtools)
+library(ggsn)
+library(ggthemes)
+library(e1071)
 ```
 
 A very rough, very basic start.
@@ -50,55 +70,9 @@ The amount of organic content stored in each sample was measured by combustion u
 
 ## Statistical analyses
 
-A correlation matrix was constructed using R statistical software to correlate each of the biological variables (number of rhizomes, culm length and total biomass) to each of the physical variables (temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%)). A single factor ANOVA test was included to compare the biomass of samples at deep and shallow depths between sites....... we need to add more to this (A.A)
+A correlation matrix was constructed using R statistical software to correlate each of the biological variables (number of rhizomes, culm length and total biomass) to each of the physical variables (temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%)). A single factor ANOVA test was included to compare the biomass of samples at deep and shallow depths between sites....... we need to add more to this (A.A).
 
 ## Data analysis
-```{r}
-library(tidyverse)
-library(Hmisc)
-library(corrplot)
-library(ggplot2)
-library(knitr)
-library(tidyverse)
-library(rmarkdown)
-library(ggpubr)
-library(ggmap)
-library(plot3D)
-library(dplyr)
-library(ggpubr)
-library(devtools)
-library(ggsn)
-library(ggthemes)
-```
-
-Loading the data
-```{r}
-R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
-```
-
-Creating a correlation matrix between each of the variables: To assess the relationship between each of the variables
-```{r}
-# This correlation plot gives the P and N values
-# I dont know if we want to consider the P and N values but the correlation is the first block of numbers
-res2 <- rcorr(as.matrix(R_assignment_AJ_, use = "complete obs"))
-res2
-```
-
-```{r}
-try1 <- cor(R_assignment_AJ_, use = "complete.obs")
-try1
-
-# Making a visualisation
-corrplot(try1)
-
-# This visualisation 
-#The function corrplot() takes the correlation matrix as the first argument. 
-#The second argument (type=“upper”) is used to display only the upper triangular of the correlation matrix.
-corrplot(try1, type = "upper", order = "hclust", 
-         tl.col = "black", tl.srt = 45)
-```
- 
-Other analysis to assess whether pH varies with depth
 
 Themes for graphs
 ```{r}
@@ -130,8 +104,14 @@ theme_AJMS <- function(AfricanJournalOfMarineScience) {
 }
 ```
 
+Loading the data
+```{r load_files1, include=TRUE}
+R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
+```
+
+
 Possible code for mapping of the cederberg area (A.A)
-```{r}
+```{r map_func, include=TRUE}
 mapping_plot <- function(df){
   mapping <- df %>% 
 ggplot(aes(x = lon, y = lat)) +
@@ -150,7 +130,7 @@ ggplot(aes(x = lon, y = lat)) +
 
 Or we could use google map version to plot the region (A.A)
 This is not co-ordinates-Need to find the proper co-ordinates
-```{r}
+```{r map_plot, include=TRUE}
 map1<- get_map(location = c(lon = 18.895099, lat = -34.362008),
                       zoom = 10, maptype = 'satellite')
 
@@ -175,19 +155,9 @@ new1 <- trial1 +
             size = 3, colour = "white")
 ```
 
+
 Some very basic analysis to get the project started (A.A)
 
-```{r}
-ggplot(data = R_assignment_AJ_, aes(x = Depth, y = pH)) + 
-  geom_col(aes(fill = Site)) +
-  theme_AJMS()
-```
-
-```{r}
-ggplot(data = R_assignment_AJ_, aes(x = Depth, y = Salinity)) + 
-  geom_col(aes(fill = Site)) +
-  theme_AJMS()
-```
 
 ```{r}
 dat1 <- R_assignment_AJ_ %>% 
@@ -195,56 +165,179 @@ dat1 <- R_assignment_AJ_ %>%
   summarise(mn.pH = mean(pH),
             sd.pH = sd(pH))
 
-ggplot(dat1, aes(x = Site, y = mn.pH)) +
+plot_A <- ggplot(dat1, aes(x = Site, y = mn.pH)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.pH - sd.pH, 
                     ymax = mn.pH + sd.pH)) +
   labs(x = "Site", y = "Average pH") +
   theme_AJMS()
-```
-```{r}
-dat1 <- R_assignment_AJ_ %>% 
+
+dat2 <- R_assignment_AJ_ %>% 
   group_by(Site) %>% 
   summarise(mn.Salinity = mean(Salinity),
             sd.Salinity = sd(Salinity))
 
-ggplot(dat1, aes(x = Site, y = mn.Salinity)) +
+plot_B <- ggplot(dat2, aes(x = Site, y = mn.Salinity)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.Salinity - sd.Salinity, 
                     ymax = mn.Salinity + sd.Salinity)) +
   labs(x = "Site", y = "Average Salinity") +
   theme_AJMS()
+
+dat3 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Temperature = mean(Temperature),
+            sd.Temperature = sd(Temperature))
+
+plot_C <- ggplot(dat3, aes(x = Site, y = mn.Temperature)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Temperature- sd.Temperature, 
+                    ymax = mn.Temperature + sd.Temperature)) +
+  labs(x = "Site", y = "Average Temperature") +
+  theme_AJMS()
+
+
+Final <- ggarrange(plot_A, plot_B,plot_C,
+                   ncol = 3, nrow = 1,
+                   common.legend = TRUE)
+Final
 ```
 
-```{r}
+```{r anova1, include=TRUE}
 Anova1 <- aov(pH~Site,data = R_assignment_AJ_)
 summary(Anova1)
 ```
 
-```{r}
+```{r anova2, include=TRUE}
 Anova1 <- aov(Temperature~Site,data = R_assignment_AJ_)
 summary(Anova1)
 ```
 
+
+Does temperature affect the number of rhizomes present
 ```{r}
-ggplot(data = R_assignment_AJ_, aes(x = Temperature, y = Salinity)) + 
+plot_1.2 <- ggplot(data = R_assignment_AJ_, aes(x = pH, y = rhizomes)) + 
   geom_col(aes(fill = Site)) +
+  theme_AJMS()
+
+plot_1.3 <- ggplot(data = R_assignment_AJ_, aes(x = Temperature, y = rhizomes)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+
+plot_1.4<- ggplot(data = R_assignment_AJ_, aes(x = Depth, y = rhizomes)) + 
+  geom_col(aes(fill = Site)) +
+  theme_AJMS()
+
+final1 <- ggarrange(plot_1.2, plot_1.3,plot_1.4,
+                   ncol = 3, nrow = 1,
+                   common.legend = TRUE)
+final1
+```
+
+```{r}
+summary(R_assignment_AJ_$Temperature)
+data <- R_assignment_AJ_
+data %>%
+  summarise(min_t = min(Temperature),
+            quart_1 = quantile(Temperature, 0.25),
+            med_t = median(Temperature),
+            mean_t = mean(Temperature),
+            quart_3 = quantile(Temperature, 0.75),
+            max_t = max(Temperature))
+
+ggplot(data, aes(x = Depth, y = Temperature)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
   theme_AJMS()
 ```
 
-Consider doing other analysis that were not used in R or biostats class.....
 
 ```{r}
-ggplot(data = R_assignment_AJ_, aes(x = Site, y = rhizomes)) + 
-  geom_col(aes(fill = Site)) +
+# Calculate sumarry stats for plotting over the box plots
+
+summary_stats <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(temp_mean = mean(Temperature))
+
+# Plot these
+plot_1 <- ggplot(data = R_assignment_AJ_, aes(x = Site, y = Temperature)) +
+  geom_boxplot(aes(fill = Site), notch = TRUE) +
+  geom_point(data = summary_stats,  size = 6, shape = 18,
+             aes(y = temp_mean, colour = "Green")) +
   theme_AJMS()
+
+
+# Calculate sumarry stats for plotting over the box plots
+
+summary_stats <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(pH_mean = mean(pH))
+
+# Plot these
+plot_2 <- ggplot(data = R_assignment_AJ_, aes(x = Site, y = pH)) +
+  geom_boxplot(aes(fill = Site), notch = TRUE) +
+  geom_point(data = summary_stats,  size = 6, shape = 18,
+             aes(y = pH_mean, colour = "Green")) +
+  theme_AJMS()
+
+# Calculate sumarry stats for plotting over the box plots
+
+summary_stats <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(rhizomes_mean = mean(rhizomes))
+
+# Plot these
+plot_3 <- ggplot(data = R_assignment_AJ_, aes(x = Site, y = rhizomes)) +
+  geom_boxplot(aes(fill = Site), notch = TRUE) +
+  geom_point(data = summary_stats,  size = 6, shape = 18,
+             aes(y = rhizomes_mean, colour = "Green")) +
+  theme_AJMS()
+
+
+Final <- ggarrange(plot_1, plot_2,plot_3,
+                   ncol = 3, nrow = 1,
+                   common.legend = TRUE)
+Final
+
+```
+
+```{r}
+# Areas and adding trend
+ggplot(data = R_assignment_AJ_, aes(y = rhizomes, x = Depth)) +
+  geom_point(aes(colour = Site)) +
+  geom_smooth(aes(colour = Site), method = "lm") +
+  coord_equal(xlim = c(0, 60), ylim = c(0,60))
+# Gray shade is the standard error
+# angle of line shows the relationship
 ```
 
 
- Need statistical analysis
- 
+```{r pearsons1, include=TRUE}
+# Pearsons correlations
+cor.test(R_assignment_AJ_$Temperature, R_assignment_AJ_$Depth, method = "pearson",
+         conf.level = 0.95)
+
+```
+
+```{r pearsons2, include=TRUE}
+# Pearsons correlations
+cor.test(R_assignment_AJ_$rhizomes, R_assignment_AJ_$Depth, method = "pearson",
+         conf.level = 0.95)
+
+```
 
 
+compaing temperature/pH/rhizomes to depth
+Test if data is normally distributed or not. If data is not normaly distibuted then use this :
+for a t-test we rather will use Wilcox rank sum test
+wilcox.test() # this is then filled with the same as for the t-test
+Things to do (A.A): Group input....
+Check for normality
+do different stats tests on variables
+what other variabbles should we include and why?
+What should be excluded and why?
+Any different analysis that could be added into the task that was not done before? WHY?
+Statistical analysis....
 
 
 
