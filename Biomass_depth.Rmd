@@ -71,20 +71,25 @@ Timms RM, Moss B. 1984. Prevention of growth of potentially dense phytoplankton 
 To understand the role and autecology of Isolepis digitata along the Krom River.  The objectives are as follows:
 To determine the effect of physical parameters on the morphology of Isolepis digitata. This will be done by assessing whether temperature, salinity and pH has an influence on the amount of rhizomes present or if these variables influence the biomass. To assess whether pH varies with depth.
 
+## Study site
+Samples were collected along the Krom River at the Kromrivier Cederberg Park (-32.54° S, 19.28° E) in February 2018 between 11am - 2pm. Physical parameters were measured for 2 sites along the Krom river between the top of the river at Disa pool and the middle of the river along a campsite.
+
 ## Methods 
 
-## Field 
-To determine the physical parameters influencing the distribution and abundance of Isolepis digitata, physical parameters including temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%) was measured using a multi-parameter Aquaprobe at each point along the river where an Isolepis digitata sample was removed at each of the two sites.
+### Field 
+
+To determine the physical parameters influencing the distribution and abundance of Isolepis digitata, physical parameters including temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%) was measured using a multi-parameter Aquaprobe at each point along the river where an Isolepis digitata sample was removed at each of the two sites. The Aquaprobe was placed at a depth of 3cm below surface waters and remained in the water for approximatly 3minutes until each of the visible recorded values stablised.
 A total of 10 samples were collected at each of the two sites, 10 from deep (21-36 cm) top section and 10 from shallow (10-20 cm) middle site water depths. Each Isolepis digitata sample that were present was removed from the bedrock using a 15cm scraper and was collected in a 300 x 300 mm SASS net having a mesh size of 1 mm. The contents of the SASS net were emptied into a plastic tray filled with 1/3 river water, making sure to remove any additional aquatic invertebrates still on the net into the tray. The aquatic invertebrates present on each Isolepis digitata sample was removed into the surrounding water in the plastic tray. Each Isolepis digitata sample was then removed from the plastic tray, placed in a ziplock bag filled with 1/3 river water and stored in the freezer until used in the laboratory. The remaining contents in the plastic tray were placed through a sieve in order to collect the aquatic invertebrates. The collected aquatic invertebrates were washed through a funnel into plastic containers with ethanol, making sure to fill the plastic containers with 1/3 ethanol. At the top site, 10 bedrock samples were also collected to compare the abundance of aquatic invertebrates present on the surrounding bedrock to the abundance present on Isolepis digitata.  
 The aquatic invertebrates corresponding to each Isolepis digitata sample were further separated into individual eppendorf tubes filled with ethanol to be analysed at a later stage. 
 
-## Laboratory 
+### Laboratory 
+
 After sample collection, the frozen Isolepis digitata samples were defrosted and laboratory experiments were conducted. The number of rhizomes, the culm length from the top of the soil to the tip of the plant for five culms and the number of spikelets were measured for each Isolepis digitata sample that was collected. All samples were placed in individual brown paper bags and were dried in the oven for a period of 4 days at 40°C. To determine the response of biomass to different environmental conditions, the total mass of each Isolepis digitata sample was recorded after the drying period and the below water mass was separated from the above water mass and was further weighed separately for each Isolepis digitata sample. 
 
 
-## Statistical analyses
+### Data Analysis
+After collection, the experimental data was recorded onto a Microsoft© Excel spreadsheet.  The spreadsheet was then converted into comma separated file (CSV) format. The statistical computing software, R Version 3.5.0, was then used to analyse the data and create graphic representations of the information that was collected. T-tests were used in order to determine if significant differences were present between the variables within the dataset. A t-test was used to determine whether there was a significant difference between the macrophyte biomass at a particular depth . A second t-test was used to determine if a significant difference exist between macrophyte biomass and TDS values. In the statistical analyses, values less than that of 0.05, were considered statistically significant.
 
-A correlation matrix was constructed using R statistical software to correlate each of the biological variables (number of rhizomes, culm length and total biomass) to each of the physical variables (temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%)). A single factor ANOVA test was included to compare the biomass of samples at deep and shallow depths between sites....... we need to add more to this (A.A).
 
 Themes for graphs
 ```{r}
