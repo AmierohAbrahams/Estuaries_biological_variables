@@ -26,6 +26,8 @@ library(ggpubr)
 library(ggmap)
 library(ggrepel)
 library(plot3D)
+library(Hmisc)
+library(corrplot)
 ```
 
 A rough start
@@ -33,6 +35,15 @@ A rough start
 ## Introduction:
 
 “Aquatic macrophytes” or “hydrophytes” are terms employed to denote a diverse assemblage of photosynthetic aquatic biota. Typically speaking, these organisms are large enough such that they may be observed unaided, by the naked eye. This group of organisms includes macroalgal members of the divisions Rhodophyta (red algae), Cyanobacteria (blue-green algae), Xanthophyta (yellow-green algae, Chlorophyta (green algae), the Bryophyta (including the liverworts and mosses), the Pteridophyta (including the ferns) as well as the Spermatophyta (commonly known as the seed-bearing plants) (Denny, 1985, Pieterse, 1990). The group is further characterized by vegetative anatomical structures which are confined either perpetually or periodically (at the very least several weeks per annum) to either the upper surface of water bodies, extending through the water surface or alternatively submerged below the surface of the water (Denny, 1985; Pieterse, 1990).
+
+# Need to work on a caption for this
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.7\linewidth]{figures/Isolepis_1}
+\end{center}
+\caption{This is what is in the Chicks data.}
+\end{figure}
+
 Macrophytes have been identified as key constituents of both wetland and aquatic ecosytems, where they are capable of shaping both the structure and the functioning of aquatic  environments due to the complex roles they exhibit within these habitats (Ervin &Wetzel, 2003; Hrivnak et al. 2009; Tamire and Mengistou 2012) . The macrophytes form the basis of food chains within their environments, while simultaneously contributing to the maintenance and promotion of foodwebs and the provision of vital ecosystem services within aquatic ecosytems (Scheffer and Jeppeson, 2007; Smith, 2011). Furthermore, these organism have been identified as playing a role in the provision of microhabitats, as their leaves, stems and roots, serve as a substrate for periphyton, collectively provide shelter for a wide range of invertebrates, fish, amphibians and reptiles (Timms and Moss, 1984). Amongst many of the other biotic components of aquatic ecosystems, macrophytes have been implicated as a primary factor in both the development and regulation of oxygen content as well as water quality in naturally occurring freshwater bodies (Moore and Ramamoorthy, 1987; Lychagina et al., 1998). The highly specific ecogeological role purported by this group of organisms comes as a direct result of an exceptionally high assimilation potential. This feature is closely correlated with their role in the production of organic matter, which inevitably precipitates and goes on to form bottom sediments. Perhaps another important feature of the macrophytes lies in their ability to accumulate biogenic elements and toxic substances such as heavy metals-which is directly correlated with the abundance of these organisms within any particular aquatic environment (Dikieva and Petrova, 1983; Burdin and Zolotukhina, 1998; Lychagina et al., 1998). The aforementioned properties and capabilities has largely resulted in an increased interest of macrophytes as objects of pollution and biogeochemical indicators within aquatic environments (Boháč, 1987; Lychagina et al., 1998, Osmolovskaya and Kurilenko, 2001; Kurilenko et al., 2002, Kurilenko and Osmolovskaya, 2006), and more importantly their ability to serve as important bioindicators of long term environmental fluctuations in water quality as well as environmental conditions make them indispensable in ecosystem management of freshwater habitats  Lacoul and Freedman, 2006; Solimini et al. 2006).
 It is realized that the manner in which macrophytes function within their respective ecosytems is directly correlated with the structural properties and attributes of the population itself, and may be considered in terms of their distribution, species composition, diversity as well as the abundance, all of which are governed by environmental factors such as water temperature, light, pH, depth, nutrients and gas composition, to name but a few (Kual et al, 1978, Pandit, 1984; Barko and Smart, 1986, Cronk and Fennessey, 2001).
 
@@ -131,7 +142,35 @@ load("~/Documents/R_assignment/sa_provinces.RData")
 ```
 
 
-Possible code for mapping of the cederberg area (A.A)
+the "get-map" co-ordinates need to be altered, not clearly showing the coordinates
+```{r}
+map1<- get_map(location = c(lon = 19.895099, lat = -34.362008),
+                      zoom = 10, maptype = 'satellite')
+
+ggmap(map1) +
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Latitude", y = "Longitude", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+trial1 <- ggmap(map1) +
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+new1 <- trial1 +
+  geom_text(data = Map_coordinates, aes(lon+0.0135, lat-0.0045, label = Site),
+            hjust = 1.05, vjust = 0.7,
+            size = 3, colour = "white")
+```
+
+
+
+Mapping the cederberg region
 ```{r map_func, include=TRUE}
 mapping_plot <- function(df){
   mapping <- df %>% 
@@ -152,8 +191,8 @@ map_1 <- mapping_plot(df = Map_coordinates)
 map_1
 ```
 
-Looking at biomass and site
 
+One graph shoowing the relationship between the variales at each of the sites
 ```{r}
 dat1 <- R_assignment_AJ_ %>% 
   group_by(Site) %>% 
@@ -169,14 +208,14 @@ plot_A <- ggplot(dat1, aes(x = Site, y = mn.pH)) +
 
 dat2 <- R_assignment_AJ_ %>% 
   group_by(Site) %>% 
-  summarise(mn.Salinity = mean(Salinity),
-            sd.Salinity = sd(Salinity))
+  summarise(mn.Dissolved_oxygen = mean(Dissolved_oxygen),
+            sd.Dissolved_oxygen = sd(Dissolved_oxygen))
 
-plot_B <- ggplot(dat2, aes(x = Site, y = mn.Salinity)) +
+plot_B <- ggplot(dat2, aes(x = Site, y = mn.Dissolved_oxygen)) +
   geom_col(aes(fill = Site)) +
-  geom_errorbar(aes(ymin = mn.Salinity - sd.Salinity, 
-                    ymax = mn.Salinity + sd.Salinity)) +
-  labs(x = "Site", y = "Average Salinity") +
+  geom_errorbar(aes(ymin = mn.Dissolved_oxygen - sd.Dissolved_oxygen, 
+                    ymax = mn.Dissolved_oxygen + sd.Dissolved_oxygen)) +
+  labs(x = "Site", y = "Average Dissolved_oxygen") +
   theme_AJMS()
 
 dat3 <- R_assignment_AJ_ %>% 
@@ -203,44 +242,39 @@ plot_D <- ggplot(dat4, aes(x = Site, y = mn.Macbio)) +
   labs(x = "Site", y = "Average Macrophyte") +
   theme_AJMS()
 
+dat5 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Depth = mean(Depth),
+            sd.Depth = sd(Depth))
 
-Final <- ggarrange(plot_A, plot_B,plot_C,plot_D,
-                   ncol = 4, nrow = 1,
+plot_E <- ggplot(dat5, aes(x = Site, y = mn.Depth)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Depth - sd.Depth, 
+                    ymax = mn.Depth + sd.Depth)) +
+  labs(x = "Site", y = "Average Depth") +
+  theme_AJMS()
+
+dat6 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.TDS = mean(TDS),
+            sd.TDS = sd(TDS))
+
+plot_F <- ggplot(dat6, aes(x = Site, y = mn.TDS)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.TDS - sd.TDS, 
+                    ymax = mn.TDS + sd.TDS)) +
+  labs(x = "Site", y = "Average TDS") +
+  theme_AJMS()
+
+
+Final <- ggarrange(plot_A, plot_B,plot_C,plot_D,plot_E, plot_F,
+                   ncol = 3, nrow = 2,
                    common.legend = TRUE)
 Final
 ```
 
 
-
-```{r}
-# Comparing macrophyte_biomass and Depth
-summary(R_assignment_AJ_$Macrophyte_Biomass)
-data <- R_assignment_AJ_
-data %>%
-  summarise(min_t = min(Macrophyte_Biomass),
-            quart_1 = quantile(Macrophyte_Biomass, 0.25),
-            med_t = median(Macrophyte_Biomass),
-            mean_t = mean(Macrophyte_Biomass),
-            quart_3 = quantile(Macrophyte_Biomass, 0.75),
-            max_t = max(Macrophyte_Biomass))
-
-A <- ggplot(data, aes(x = Depth, y = Macrophyte_Biomass)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  theme_AJMS()
-
-# Comparing macrophyte biomass with tds
-B <- ggplot(data, aes(x = TDS, y = Macrophyte_Biomass)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  theme_AJMS()
-
-combined <- ggarrange(A, B,
-                   ncol = 2, nrow = 1,
-                   common.legend = TRUE)
-combined
-```
-
+ Graph showing the relationship between macrophyte biomass and depth
 ```{r}
 # Areas and adding trend
 # Macrophyte Biomass
@@ -268,5 +302,172 @@ combined1
 
 
 
+```{r}
+R_assignment_AJ_ %>%
+  group_by(Site) %>% 
+summarise(mean_temp = mean(Temperature),
+          mean_pH = mean(pH),
+          mean_depth = mean(Depth),
+          mean_TDS = mean(TDS),
+          mean_mac = mean(Macrophyte_Biomass),
+          mean_diss = mean(Dissolved_oxygen))
+```
+
+
+Table: The averages of all of the physio_chemical variables measured in each site
+-----------------------------------------------------------------------------------------------------------------------------------
+                   Temperature (°C)   Depth (cm)  pH    TDS (mg/l)    Macrophyte Biomass   Dissolved oxygen (mg/l)  Salinity (PSU)
+------------------- ----------------- -------  -------  -----  ------------------ ------------------------------ ----------------
+                
+
+Middle                   20.58         24.28      6.94   32.70             18.80                  18.61              0.01
+
+Upper                    20.89         24.90      5.69   26.96             17.07                  6.60               0.02
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Now testing for normality in order to decide which statistical analysis to use
+Page 48 in the biostats PDF document
+```{r}
+R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(norm_temp = as.numeric(shapiro.test(Temperature)[2]),
+            norm_TDS = as.numeric(shapiro.test(TDS)[2]),
+            norm_pH = as.numeric(shapiro.test(pH)[2]),
+            norm_diss = as.numeric(shapiro.test(Dissolved_oxygen)[2]),
+            norm_mac = as.numeric(shapiro.test(Macrophyte_Biomass)[2]),
+            norm_depth = as.numeric(shapiro.test(Depth)[2]))
+```
+Testing homoscedasity
+
+```{r}
+R_assignment_AJ_ %>%
+group_by(Site) %>%
+summarise(sample_temp = var(Temperature),
+          sample_pH = var(pH),
+          sample_TDS = var(TDS),
+          sample_mac = var(Macrophyte_Biomass),
+          sample_depth = var(Depth),
+          sample_diss = var(Dissolved_oxygen))
+```
+
+The non-parametric version of a t-test is a Wilcox rank sum test. To perform this test in R we
+may again use compare_means() and specify the test we want:
+```{r}
+compare_means(Macrophyte_Biomass ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Temperature ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(pH ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Dissolved_oxygen ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Depth ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(TDS ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+```
+
+Making a correlation matrix between the environmental variables variables
+This can also be made into a table to add in the R document
+
+```{r}
+corr_data <- read_csv("~/Documents/R_assignment/corr_data.csv")
+
+res2 <- rcorr(as.matrix(corr_data))
+res2
+
+flattenCorrMatrix <- function(cormat, pmat) {
+  ut <- upper.tri(cormat)
+  data.frame(
+    row = rownames(cormat)[row(cormat)[ut]],
+    column = rownames(cormat)[col(cormat)[ut]],
+    cor  =(cormat)[ut],
+    p = pmat[ut]
+  )
+}
+
+cor3<-rcorr(as.matrix(corr_data, use = "complete.obs"))
+flattenCorrMatrix(cor3$r, cor3$P)
+```
+
+
+PLotting the correlation matrix
+```{r}
+try1 <- cor(corr_data, use = "complete.obs")
+try1
+
+# Making a visualisation
+corrplot(try1)
+
+```
+
+Creating a Boxplot
+```{r}
+plot1 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = Macrophyte_Biomass, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot1
+
+plot2 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = Temperature, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot2
+
+plot3 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = Depth, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot3
+
+plot4 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = pH, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot4
+
+plot5 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = TDS, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot5
+
+plot6 <- R_assignment_AJ_ %>%
+    ggplot(aes(x = Site)) +
+    geom_boxplot(aes(y = Dissolved_oxygen, fill = Site), alpha = 0.3) +
+  theme_AJMS()
+  
+plot6
+
+combined2 <- ggarrange(plot1, plot2,plot3, plot4, plot5, plot6,
+                   ncol = 3, nrow = 2,
+                   common.legend = TRUE)
+combined2
+```
+
+
+Making a 3D scatter plot
+```{r}
+library(plotly)
+x <- biomass <- R_assignment_AJ_$Macrophyte_Biomass
+y <- Temperature <- R_assignment_AJ_$Temperature
+z <- Depth <- R_assignment_AJ_$Depth
+
+scatter3D(x, y, z, pch = 18,  theta = 20, phi = 20,
+           xlab = "Macrophyte Biomass",
+          ylab ="Temperature", zlab = "Depth")
+
+
+```
+
+
+normal scatter plot in R
+```{r}
+plot(R_assignment_AJ_$Macrophyte_Biomass, R_assignment_AJ_$Depth, xlab= "Macrophyte Biomass (g)", ylab= "Depth  (cm)", pch=2, cex.main=1.5, frame.plot=FALSE , col="blue") +
+  theme_AJMS()
+```
 
 
