@@ -30,77 +30,79 @@ library(Hmisc)
 library(corrplot)
 ```
 
-A rough start
+## Introduction 
 
-## Introduction:
+Freshwater is regarded as perhaps the single most important natural resource required by human beings. The role of freshwater is amplified in impoverished countries, as freshwater ecosystems provide an array of indispensable natural resources which inevitably influence human livelihood and health (Covich et al., 2004). These freshwater ecosystems also support a cornucopia of plant and animal assemblages, contributing significantly to biodiversity, which further contributes to the value of the types of ecosystems in terms of resource provision (Dudgeon et al., 2006, Vié, 2008). We find that the proportion of biodiversity sustained by these ecosystems is significantly high, despite the fact that freshwater ecosystems encompass a mere 0.8% of the Earth’s surface area, and constitute 0.01% of the Earth’s freshwater (Gleick et al., 1996). Moreover, it is established that these freshwater ecosystems, serve as habitats to at least 126 000 described species of plants and animals, accounting for at least 7% of all described species of living organisms, which is considerably high given the relatively small area of this type of habitat (Dudgeon et al., 2006, Bailan et al., 2010). Despite the ecological value of these habitats, we find that these types of ecosystems have in recent times, exhibited accelerated rates of biodiversity loss (Dudgeon et al., 2006) 
 
-“Aquatic macrophytes” or “hydrophytes” are terms employed to denote a diverse assemblage of photosynthetic aquatic biota. Typically speaking, these organisms are large enough such that they may be observed unaided, by the naked eye. This group of organisms includes macroalgal members of the divisions Rhodophyta (red algae), Cyanobacteria (blue-green algae), Xanthophyta (yellow-green algae, Chlorophyta (green algae), the Bryophyta (including the liverworts and mosses), the Pteridophyta (including the ferns) as well as the Spermatophyta (commonly known as the seed-bearing plants) (Denny, 1985, Pieterse, 1990). The group is further characterized by vegetative anatomical structures which are confined either perpetually or periodically (at the very least several weeks per annum) to either the upper surface of water bodies, extending through the water surface or alternatively submerged below the surface of the water (Denny, 1985; Pieterse, 1990).
+Based on studies by Dudgeon et al (2006), it is realized that these freshwater ecosystems are currently being subjected to an array of threats which include habitat transformation and degradation, increased levels of water pollution, the overexploitation of biota, as well as a number of impacts that are closely associated with water abstraction and subsequent flow modification coming as a direct consequence of man-made water retention reservoirs. It becomes woefully apparent that factors such as precipitation, temperature and run off patterns, a product of global climate change, may inevitably exacerbate the aforementioned threats and consequently lead to the physical isolation and fragmentation of these types of ecosystems (Dudgeon et al., 2006). These threats coupled with the aforementioned factors have ultimately led to significant decreases in biodiversity within these freshwater ecosystems. According to Darwall et al., (2011), at least 20% of amphibian biodiversity, 27 % of mollusk diversity and 30 percent of freshwater fish diversity are currently classified as threatened in accordance with the IUCN Red List, which goes on to describe freshwater ecosystems as perhaps the most endangered ecosystems in the globe. Studies by Vié (2008), reveal that freshwater ecosystems serve as habitats to at least 65 000 species of invertebrates, 12 000 species of freshwater fish and 500 species of amphibians. While aquatic plant species have been identified as contributing significantly less to biodiversity within these types of habitats, their presence in freshwater ecosystems have been highlighted given their involvement in the provision of a multitude of ecosystem services as well as playing an integral role in crucial ecological processes (Lacould and Freedman 2006; Wersal et al. 2006; Bornette and Puijalon 2009).
 
-# Need to work on a caption for this
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=0.7\linewidth]{figures/Isolepis_1}
-\end{center}
-\caption{This is what is in the Chicks data.}
-\end{figure}
+Studies by Balian et al (2010) that macrophytes encompass a total of 2614 species within freshwater ecosytems and exhibuiting low levels of diversity given the fact that they comprise a mere 2% of all described freshwater biota, and represent 1% of all described vascular plant biota. Macrophytes typically enjoy cosmopolitan distributions, with the highest levels of endemism and species diversity being exhibited in temperate regions across the globe (Bailan et al., 2010). It should however be noted that certain tropical and subtropical regions may exhibit significantly high levels of endemsims and species richness- these include areas within South America, where at least 81 % of these organism are considered to be endemic, as well as areas within Southern Africa, where they exhibit around 20% endemism (Bailan et al., 2010). Within South Africa, we find high diversity of wetland macrophytes, with centers for diversity and endemism being concentrated to areas of the Western Cape and Kwa-Zulu Natal (Darwall et al, 2009). Despite these high levels of diversity within these regions, it is realized that the existing body of information currently available for submerged species of macrophytes remains scant, as the focus of previous studies have generally directed their attention towards floating and emergent species of macrophytes. 
+The primary characteristic separating them from the emergent and floating types lies in the fact that these species exist entirely beneath the surface of the water. Submerged macrophytes are characterized by their ability to alter and maintain various components of the freshwater habitat, including the regulation of turbidity within water columns, physio-chemical properties of water while simultaneously acting as carbon reservoirs (Scheffer and Jeppeson, 2007; Kennedy et al., 2015). It is realized that the manner in which macrophytes function within their respective ecosystems, may ultimately be governed by the structural attributes of each individual population, as well as factors such as distribution, species composition and diversity (Kaul et al., 1978). Moreover, we find that these aforementioned factors are ultimately established by environmental factors such as the temperature, pH, light, depth, nutrient and gas composition of the waters in which they are distributed (Barko and Smart, 1986).  Given the close biophysical relationship between these organisms and their environment, we find that they are often valuable indicators of ecosystem function and health, as macrophyte composition and biomass are directly correlated with certain environmental factors (lacoul and Freedman, 2006)
 
-Macrophytes have been identified as key constituents of both wetland and aquatic ecosytems, where they are capable of shaping both the structure and the functioning of aquatic  environments due to the complex roles they exhibit within these habitats (Ervin &Wetzel, 2003; Hrivnak et al. 2009; Tamire and Mengistou 2012) . The macrophytes form the basis of food chains within their environments, while simultaneously contributing to the maintenance and promotion of foodwebs and the provision of vital ecosystem services within aquatic ecosytems (Scheffer and Jeppeson, 2007; Smith, 2011). Furthermore, these organism have been identified as playing a role in the provision of microhabitats, as their leaves, stems and roots, serve as a substrate for periphyton, collectively provide shelter for a wide range of invertebrates, fish, amphibians and reptiles (Timms and Moss, 1984). Amongst many of the other biotic components of aquatic ecosystems, macrophytes have been implicated as a primary factor in both the development and regulation of oxygen content as well as water quality in naturally occurring freshwater bodies (Moore and Ramamoorthy, 1987; Lychagina et al., 1998). The highly specific ecogeological role purported by this group of organisms comes as a direct result of an exceptionally high assimilation potential. This feature is closely correlated with their role in the production of organic matter, which inevitably precipitates and goes on to form bottom sediments. Perhaps another important feature of the macrophytes lies in their ability to accumulate biogenic elements and toxic substances such as heavy metals-which is directly correlated with the abundance of these organisms within any particular aquatic environment (Dikieva and Petrova, 1983; Burdin and Zolotukhina, 1998; Lychagina et al., 1998). The aforementioned properties and capabilities has largely resulted in an increased interest of macrophytes as objects of pollution and biogeochemical indicators within aquatic environments (Boháč, 1987; Lychagina et al., 1998, Osmolovskaya and Kurilenko, 2001; Kurilenko et al., 2002, Kurilenko and Osmolovskaya, 2006), and more importantly their ability to serve as important bioindicators of long term environmental fluctuations in water quality as well as environmental conditions make them indispensable in ecosystem management of freshwater habitats  Lacoul and Freedman, 2006; Solimini et al. 2006).
-It is realized that the manner in which macrophytes function within their respective ecosytems is directly correlated with the structural properties and attributes of the population itself, and may be considered in terms of their distribution, species composition, diversity as well as the abundance, all of which are governed by environmental factors such as water temperature, light, pH, depth, nutrients and gas composition, to name but a few (Kual et al, 1978, Pandit, 1984; Barko and Smart, 1986, Cronk and Fennessey, 2001).
+Isolepis digitata (Cyperaceae), is water sedge endemic to riverine systems within the Western and Eastern Cape provinces of South Africa (van Ginkel et al., 2011). The species exhibits a perennial growth habit, and is commonly found in dense tufted mats, on the surfaces of rocks within freshwater ecosystems, and typically found in the higher, fast flowing regions of rivers(Low, 2009). The biomass accumulation and growth of this species has been closely linked to temperature, with temperatures above 13oC, promoting both the accumulation of biomass and the rate of growth of the species (Tshilla, 2014). I.digitata has been shown to play an integral role in the maintenance and regulation of several aspects of freshwater ecosystems- this includes the maintenance of shore integrity (erosion control) while simultaneously maintain the quality of waters in which they are distributed (Tshilla, 2014). Despite the significant role it plays in freshwater ecosystems, as well as its endemic status, the species has received very little attention, and as a consequence, we find that the available body of information regarding the autecology of the species remains scant (Low, 2009).
 
-The genus Isolepis, is a group of submerged macrophytes which encompasses a total of 76 species, that are typically distributed across cooler tropical and temperate localities and enjoy extensive distributions across Australasia and Africa (Muasya, 1998). Within South Africa, the genus encompasses a total of 30 species, 20 of which have been identified as being endemic to the region (Archer, 2000). The high levels of diversity and endemism exhibited by its members may be attributed to speciation events which may have been catalyzed by climatic changes affecting the entire Cape floristic Region during the Tertiary through Pleistocene period (Linder, 2005). Within South Africa, Isolepis exists as individuals exhibiting an annual growth cycle, typically occurring in ephemeral wetland areas (obligate aquatic organisms), or as perennial species which typically occupy the edges of wetland areas (facultative aquatics), alternatively they  may establish themselves on the surface of shallow freshwater systems (Muasya and Simpson, 2002). The species Isolepsis digitata, is endemic to the Cape Floristic Region, which extends throughout the southwestern regions of the Western Cape, northward towards the Nama-Karoo region, and is characterized by a winter rainfall climate (Archer, 2000). Aside from the morphological characteristics of this species, the available body of information regarding its growth and ecological role within freshwater ecosystems remains scant. Within the Cape Floristic Region, we find that it enjoys distributions between Clanwilliam and Riversdale, within the Western Cape Province, and is commonly found in fast flowing streams, where it forms dense clusters on the surfaces of rocks and flowers during the spring and summer months (Archer, 2000)
-Here we investigate the role and autecology of the macrophyte Isolepis digitata, throughout the Krom River ecosystem. The study aims to provide a better understanding regarding the effects of physical environmental parameters on the developmental biology of Isolepis digitata, with particular emphasis being placed on the impact that water parameters such as pH, salinity, depth and gas composition have on biomass accumulation.
+Here we investigate the submerged macrophyte I.digitata, within the Krom River, Cederberg. Studies by Nel et al. (2007) have highlighted the importance of prioritizing the conservation of riverine systems, given the fact that up to 64% of the river ecosystems within the province are currently classified as endangered. We find that the Krom River, has undergone extensive transformation, a consequence of anthropogenic activities that have manifested in the form of altered community structures and diversity of freshwater, as well as the encroachment of invasive riparian vegetation. Alterations to habitats have inevitably led to a decrease in macrophyte diversity and abundance (Wersal, 2006). This directs its efforts towards investigating the differences in both the chemical/physical parameters of waters within the Krom River, as well as the subsequent impact that these factors have on the accumulation of biomass of I.digitata.
 
 
-Archer, C [in:] Goldblatt, P., & Manning, J. (2000). Cape plants: a conspectus of the Cape flora of South Africa. National Botanical Institute.
-Barko, J. W., & Smart, R. M. (1986). Sediment‐related mechanisms of growth limitation in submersed macrophytes. Ecology, 67(5), 1328-1340.
-Boháč, J. (1987). AM Nikanorov, AV Zhulidov and AD Pokarzhevskii: Biomonitoring tyazhelykh metallov v presnovodnykh ekosistemakh (Biomonitoring of heavy metals in fresh water ecosystems).–144 pp. Leningrad: Gidrometeoizdat, 1985 (in Russian).
+Balian E, Harrison I, Butchart S, Chambers P, Cordeiro J, Cumberlidge N, de Moor F, Gascon C, James H, Kalkman V, van Dijk PP, Yeo D. 2010. Chapter 2. Diversity of Species in Freshwater Systems. In: RA Mittermeier, T Farrell, IJ Harrison, AJ Upgren & T Brooks (eds), Freshwater: the essence of Life. China: Earth in Focus Editions. pp 50-89.
 
-Burdin, K. S., & Zolotukhina, E. Y. (1998). Tyazhelye metally v vodnykh rasteniyakh (akkumulyatsiya i toksichnost’).Denny, P., 1985. The Ecology and Management of African Wetland Vegetation. W. Junk, The Hague
-Cronk, J., & Fennessey, M. (2001). Wetland Plants: Biology and Ecology (p. 462). Boca Raton: Lewis Publishers.
-Dikieva, D., & Petrova, I. A. Chemical Composition of Macrophytes and Factors Determining Concentrations of Mineral Substances in Higher Aquatic Plants. Gidrobiologicheskie protsessy v vodoemakh, 107-211.
-Ervin, G. N., & Wetzel, R. G. (2003). An ecological perspective of allelochemical interference in land–water interface communities. Plant and Soil, 256(1), 13-28.
-Hrivnák, R., Oťaheľová, H., & Valachovič, M. (2009). Macrophyte distribution and ecological status of the Turiec River (Slovakia): Changes after seven years. Archives of Biological Sciences, 61(2), 297-306.
-Kaul, S. (1982). Community architecture biomass and production in some typical wetlands of Kashmir. Indian journal of ecology.
-Kurilenko, V. V., & Osmolovskaya, N. G. (2006). Ecological-biogeochemical role of macrophytes in aquatic ecosystems of urbanized territories (an example of small water bodies of St. Petersburg). Russian Journal of Ecology, 37(3), 147-151.
-Lacoul, P., & Freedman, B. (2006). Environmental influences on aquatic plants in freshwater ecosystems. Environmental Reviews, 14(2), 89-136.
-Linder, H. P. (2005). Evolution of diversity: the Cape flora. Trends in plant science, 10(11), 536-541.
-Lychagina, N. Y., Kasimov, N. S., Lychagin, M. Y., & Kasimov, N. S. (1998). Biogeochemistry of macrophytes of the Volga delta. Geoecology of the Caspian Sea, 4.Kurilenko, V. V., & Osmolovskaya, N. G. (2006). Ecological-biogeochemical role of macrophytes in aquatic ecosystems of urbanized territories (an example of small water bodies of St. Petersburg). Russian Journal of Ecology, 37(3), 147-151.
-Moore, J. W., & Ramamoorthy, S. (2012). Heavy metals in natural waters: applied monitoring and impact assessment. Springer Science & Business Media.
-Muasya, A. M. (1998). Systematics of the genus Isolepis R. Br.(Cyperaceae). Reading: Muthama Muasya x, 185p.-illus.En Icones, Anatomy and morphology, Keys.Systematics: ANGIOSPERMAE (CYPERACEAE: ISOLEPIS)
-Osmolovskaya, N. G., & Kurilenko, V. V. (2001). Biogeochemical aspects of heavy metals phytoindication in urban aquatic ecosystems. Biogeochemical Processes and Cycling of Elements in the Environment, 217-218.
-Pandit, A. K. (1984). Role of macrophytes in aquatic ecosystems and management of fresh water resources. J. Environ. Manage.;(United States), 18(1).Pieterse A. H., 1990. Introduction (Chapter 1). In Pieterse A.H., & K. J. Murphy (eds), Aquatic Weeds. Oxford University Press, Oxford, UK: 3–16.
+Barko, J.W. and Smart, R.M., 1986. Sediment‐related mechanisms of growth limitation in submersed macrophytes. Ecology, 67(5), pp.1328-1340.
 
-Salt, D. E., Smith, R. D., & Raskin, I. (1998). Phytoremediation. Annual review of plant biology, 49(1), 643-668.
-Scheffer, M., & Jeppesen, E. (2007). Regime shifts in shallow lakes. Ecosystems, 10(1), 1-3.
-Smith J.E. (2011), Algae [in:] Simberloff, D., & Rejmánek, M. (Eds.). (2011). Encyclopedia of biological invasions (No. 3). University of California Press.
-Solimini, A. G., Cardoso, A. C., & Heiskanen, A. S. (2006). Indicators and methods for the ecological status assessment under the Water Framework Directive. Linkages between chemical and biological quality of surface waters Joint Research Centre, European Commission, 1-262.
-Tamire, G., & Mengistou, S. (2013). Macrophyte species composition, distribution and diversity in relation to some physicochemical factors in the littoral zone of Lake Ziway, Ethiopia. African Journal of Ecology, 51(1), 66-77.
-Timms RM, Moss B. 1984. Prevention of growth of potentially dense phytoplankton populations by zooplankton grazing, in the presence of zooplanktivorous fish, in a shallow wetland ecosystem. Limnol Oceanogr 29: 472-486.
+Bornette G, Puijalon S. 2009. Macrophytes: Ecology of Aquatic Plants. Chichester: John Wiley & Sons, Ltd.
+
+Covich AP, Austen MC, Bärlocher F, Chauvet E, Cardinale BJ, Biles CL, Inchausti P, Dangles O, Solan M, Gessner MO, Statzner B. 2004. The role of biodiversity in the functioning of freshwater and marine benthic ecosystems. BioScience 54: 767-775.
+
+Darwall WR, Holland RA, Smith KG, Allen D, Brooks EG, Katarya V, Pollock CM, Shi Y, Clausnitzer V, Cumberlidge N, Cuttelod A. 2011. Implications of bias in conservation research and investment for freshwater species. Conservation Letters 6: 474-482.
+
+de Moor FC, Day J. 2013. Aquatic biodiversity in the mediterranean region of South Africa. Hydrobiologia 719: 237-268.
+
+Dudgeon D, Arthington AH, Gessner MO, Kawabata ZI, Knowler DJ, Lévêque C, Naiman RJ, Prieur-Richard AH, Soto D, Stiassny ML Sullivan CA. 2006. Freshwater biodiversity: importance, threats, status and conservation challenges. Biological review 81: 163-182.
+
+Garrow, C. and Marr, S., 2012. Swimming on the edge of extinction. The perilous state of the indigenous freshwater.
+
+Gleick PH. 1996. Basic water requirements for human activities: meeting basic needs. Water international 21: 83-92.
+
+Goldblatt P, Manning JC. 2002. Plant diversity of the Cape region of southern Africa. Annals of the Missouri Botanical Garden 89: 281-302.
+
+Kaul, S., 1982. Community architecture biomass and production in some typical wetlands of Kashmir. Indian journal of ecology.
+
+Kennedy MP, Lang P, Grimaldo JT, Martins SV, Bruce A, Hastie A, Lowe S, Ali MM, Sichingabula H, Dallas H, Briggs J. 2015. Environmental drivers of aquatic macrophyte communities in southern tropical African rivers: Zambia as a case study. Aquatic Botany 124: 19-28.
+
+Lacoul P, Freedman B. 2006. Environmental influences on aquatic plants in freshwater ecosystems. Environmental Reviews 14: 89-136.
+
+Low B. 2009. Rivers running through-examining the botanical hearts of ten Cape rivers. Veld & Flora 95: 198-201.
+
+Marr SM, Impson ND, Tweddle D. 2012. An assessment of a proposal to eradicate non-native fish from priority rivers in the Cape Floristic Region, South Africa. African Journal of Aquatic Science 37: 131-142.
+
+Nel JL, Roux DJ, Maree G, Kleynhans CJ, Moolman J, Reyers B, Rouget M, Cowling RM. 2007. Rivers in peril inside and outside protected areas: a systematic approach to conservation assessment of river ecosystems. Diversity and Distributions 13: 341-352.
+
+Scheffer M, Jeppesen E. 2007. Regime shifts in shallow lakes. Ecosystems 10: 1-3.
+
+Shelton J, Weyl O, van Der Walt J, Marr S, Impson D, Maciejewski K, Tye D, Dallas H, Esler K. 2017. Effect of an intensive mechanical removal effort on a population of non‐native rainbow trout Oncorhynchus mykiss in a South African headwater stream. Aquatic Conservation: Marine and Freshwater Ecosystems 27: 1015 – 1055.
+
+Tshiila AA. 2014. Isolepis. Available at www.pza.sanbi.org/isolepis [accessed 29 August 2017].\
+
+Vié JC. 2008. The IUCN Red list: a key conservation tool. In W: Vié JC, Hilton-Taylor C & SN Stuart (Eds.), The 2008 Review of The IUCN Red list of Threatened Species (pp 1-6). Gland, Switzerland: IUCN.  
+
+van Ginkel CE, Glen RP, Gordon-Gray KD, Cilliers CJ, Muasya M, Van Deventer PP. 2011. Easy identification of some South African wetland plants (grasses, restios, sedges, rushes, bulrushes, eriocaulons and yellow-eyed grasses). Water Research Commission, Pretoria. pp 110.
+
+Wersal RM, Madsen JD, McMillan BR, Gerard PD. 2006. Environmental factors affecting biomass and distribution of Stuckenia pectinata in the Heron Lake System, Minnesota, USA. Wetlands 26: 313-321.
+
+## Materials and methods
+### Study area
+The study was conducted at the Krom River (Figure 1), which is an eastward flowing tributary originating from the Matjies River, within the Olifants-Doring River catchment area and exhibits a total length of approximately 15 km ( Marr et al., 2012; Shelton et al., 2017). The Krom River is situated within the Cedarberg, located approximately 280 km outside of Cape, within the Western Cape Province, South Africa (de Moor and Day, 2013). The area is marked by the presence of the Cape Fold Mountains, comprising shale and quartzitic sandstone which results in rivers of this region exhibiting waters which are typically oligotrophic in nature, and slightly acidic in terms of its pH ( Goldblatt and Manning, 2002; de Moor and Day, 2013). The region is further characterized by a Mediterranean climate and thus, the region typically experiences hot dry summer months, followed by winter months which are cold and wet (Shelton et al., 2017). As such, the vast majority of rainfall experienced within this region occurs during the winter months, with the average maximum rainfall falling in the range of 250mm per annum (Garrow and Marr, 2012). This study identified two sites within the study area, that being, the upper site and the intermediate site (Figure 2). The sites were separated on the basis of depth, with the upper site exhibiting a greater depth when compared to the intermediate site, which was considerably shallower. The upper site was located above the Disa Pool, while the intermediate site was located directly adjacent to the campsite within the Krom River Cedarberg Park. All samples collected from the study area were recorded using a hand held GPS (Garmin eTrex 10). All sampling took place during February 2018, over a 4 day period, between 11h00 and 14h00.
 
 
-## Aim
-To understand the role and autecology of Isolepis digitata along the Krom River.  The objectives are as follows:
-To determine the effect of physical parameters on the morphology of Isolepis digitata. This will be done by assessing whether temperature, salinity and pH has an influence on the amount of rhizomes present or if these variables influence the biomass. To assess whether pH varies with depth.
+Species distribution and aquatic habitat characterization
+A wide array of variables, relating to the chemical/physical properties of river water was recorded at each of the two sites. These variables included the temperature (oC), pH, electrical conductivity (μS cm-1), total dissolved solids (TDS: ppm) and salinity (PSU) were quantified in situ using a Hanna® HI 98129 pocket multi-function meter (HANNA Instruments, Inc.). A total of 50 replicates were taken at both the upper and lower sites, at a depth of 3 cm below the water surface, for a total of 3 minutes, or until the measurement appearing on the apparatus stabilized.
 
-## Study site
-Samples were collected along the Krom River at the Kromrivier Cederberg Park (-32.54° S, 19.28° E) in February 2018 between 11am - 2pm. Physical parameters were measured for 2 sites along the Krom river between the top of the river at Disa pool and the middle of the river along a campsite.
-
-## Methods 
-
-### Field 
-
-To determine the physical parameters influencing the distribution and abundance of Isolepis digitata, physical parameters including temperature (°C), pH, electrical conductivity (µS/cm), total dissolved solids (mg/l), salinity (PSU), dissolved O2 (mg/l) and O2 Saturation (%) was measured using a multi-parameter Aquaprobe at each point along the river where an Isolepis digitata sample was removed at each of the two sites. The Aquaprobe was placed at a depth of 3cm below surface waters and remained in the water for approximatly 3minutes until each of the visible recorded values stablised.
-A total of 10 samples were collected at each of the two sites, 10 from deep (21-36 cm) top section and 10 from shallow (10-20 cm) middle site water depths. Each Isolepis digitata sample that were present was removed from the bedrock using a 15cm scraper and was collected in a 300 x 300 mm SASS net having a mesh size of 1 mm. The contents of the SASS net were emptied into a plastic tray filled with 1/3 river water, making sure to remove any additional aquatic invertebrates still on the net into the tray. The aquatic invertebrates present on each Isolepis digitata sample was removed into the surrounding water in the plastic tray. Each Isolepis digitata sample was then removed from the plastic tray, placed in a ziplock bag filled with 1/3 river water and stored in the freezer until used in the laboratory. The remaining contents in the plastic tray were placed through a sieve in order to collect the aquatic invertebrates. The collected aquatic invertebrates were washed through a funnel into plastic containers with ethanol, making sure to fill the plastic containers with 1/3 ethanol. At the top site, 10 bedrock samples were also collected to compare the abundance of aquatic invertebrates present on the surrounding bedrock to the abundance present on Isolepis digitata.  
-The aquatic invertebrates corresponding to each Isolepis digitata sample were further separated into individual eppendorf tubes filled with ethanol to be analysed at a later stage. 
-
-### Laboratory 
-
-After sample collection, the frozen Isolepis digitata samples were defrosted and laboratory experiments were conducted. The number of rhizomes, the culm length from the top of the soil to the tip of the plant for five culms and the number of spikelets were measured for each Isolepis digitata sample that was collected. All samples were placed in individual brown paper bags and were dried in the oven for a period of 4 days at 40°C. To determine the response of biomass to different environmental conditions, the total mass of each Isolepis digitata sample was recorded after the drying period and the below water mass was separated from the above water mass and was further weighed separately for each Isolepis digitata sample. 
+### Biomass quantification
+The biomass of I. digitata was established through the collection of specimens from both the upper and the intermediate sites within the study area. A total of 50 specimens were collected from either of the two sites, from a 25 cm x 25 cm quadrat. Following collection, specimens were identified to species level using a field guide. Collected submerged macrophytes were placed in zip-lock bags filled with 1/3 river water, and frozen at -12oC for further analyses in the laboratory. In the lab, macrophytes were thawed at room temperature, and rinsed using a sieve in an effort to remove any ambient material or sediment which may have been present on the specimens. The macrophytes were then dehydrated at 40oC for a period of 72 hours, using the Memmert 854 Schwabach® Model UL80 oven. The biomass (g) of dehydrated specimens was then measured to two decimal places using the Mettler Toledo® New Classic SG Model ML802E scale.  
 
 
-### Data Analysis
-After collection, the experimental data was recorded onto a Microsoft© Excel spreadsheet.  The spreadsheet was then converted into comma separated file (CSV) format. The statistical computing software, R Version 3.5.0, was then used to analyse the data and create graphic representations of the information that was collected. T-tests were used in order to determine if significant differences were present between the variables within the dataset. A t-test was used to determine whether there was a significant difference between the macrophyte biomass at a particular depth . A second t-test was used to determine if a significant difference exist between macrophyte biomass and TDS values. In the statistical analyses, values less than that of 0.05, were considered statistically significant.
 
+### Statistical analysis
+All statistical analyses conducted, were performed using R. v. 3.4.2. In all of the testes conducted, results were considered significant at p< 0.05. Prior to statistical analyses, the Shapiro-Wilks test was employed to establish the normality of the data, which revealed that the data was non-normally distributed. The results of the Shaipro-Wilks test were further corroborated by assessing the homoscedasticity of the data. Homoscedasticity of the data was established through the comparative analyses of variances of each of the variables. Where these differences were less than four or more times in size, it was assumed that the data was normally distributed. Where differences were greater than four or more times, we were able to conclude that the data was non-normally distributed. Analysis of the data using the aforementioned assessments revealed that the data collected relating to both the biomass of I.digitata, as well as the chemical/physical properties of river water, were in fact non-normally distributed. Given the nature of the variables being employed, differences between these variables were established using the Mann- Whitney U test. The Mann-Whitney U test is a non-parametric test to the independent sample t-test. Boxplots were constructed to provide a graphical representation of distributions relating to both the biomass of I.digitata  as well as the physical/chemical parameters of river water. I need to see what u have done with the data before I can type any more on this
 
 Themes for graphs
 ```{r}
@@ -215,7 +217,7 @@ plot_B <- ggplot(dat2, aes(x = Site, y = mn.Dissolved_oxygen)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.Dissolved_oxygen - sd.Dissolved_oxygen, 
                     ymax = mn.Dissolved_oxygen + sd.Dissolved_oxygen)) +
-  labs(x = "Site", y = "Average Dissolved_oxygen") +
+  labs(x = "Site", y = "Average Dissolved Oxygen (mg/l)") +
   theme_AJMS()
 
 dat3 <- R_assignment_AJ_ %>% 
@@ -227,7 +229,7 @@ plot_C <- ggplot(dat3, aes(x = Site, y = mn.Temperature)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.Temperature- sd.Temperature, 
                     ymax = mn.Temperature + sd.Temperature)) +
-  labs(x = "Site", y = "Average Temperature") +
+  labs(x = "Site", y = "Average Temperature (°C)") +
   theme_AJMS()
 
 dat4 <- R_assignment_AJ_ %>% 
@@ -239,7 +241,7 @@ plot_D <- ggplot(dat4, aes(x = Site, y = mn.Macbio)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.Macbio - sd.Macbio, 
                     ymax = mn.Macbio + sd.Macbio)) +
-  labs(x = "Site", y = "Average Macrophyte") +
+  labs(x = "Site", y = "Average Macrophyte Biomass (g)") +
   theme_AJMS()
 
 dat5 <- R_assignment_AJ_ %>% 
@@ -251,7 +253,7 @@ plot_E <- ggplot(dat5, aes(x = Site, y = mn.Depth)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.Depth - sd.Depth, 
                     ymax = mn.Depth + sd.Depth)) +
-  labs(x = "Site", y = "Average Depth") +
+  labs(x = "Site", y = "Average Depth (cm)") +
   theme_AJMS()
 
 dat6 <- R_assignment_AJ_ %>% 
@@ -263,7 +265,7 @@ plot_F <- ggplot(dat6, aes(x = Site, y = mn.TDS)) +
   geom_col(aes(fill = Site)) +
   geom_errorbar(aes(ymin = mn.TDS - sd.TDS, 
                     ymax = mn.TDS + sd.TDS)) +
-  labs(x = "Site", y = "Average TDS") +
+  labs(x = "Site", y = "Average TDS (mg/l)") +
   theme_AJMS()
 
 
@@ -282,6 +284,7 @@ PLOT1 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Depth)
   geom_point(aes(colour = Site)) +
   geom_smooth(aes(colour = Site), method = "lm") +
   coord_equal(xlim = c(0, 60), ylim = c(0,60)) +
+  labs(x = "Macrophyte Biomass (g)", y = "Depth (cm)") +
     theme_AJMS()
 # Gray shade is the standard error
 # angle of line shows the relationship
@@ -292,6 +295,7 @@ PLOT2 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = TDS)) 
   geom_point(aes(colour = Site)) +
   geom_smooth(aes(colour = Site), method = "lm") +
   coord_equal(xlim = c(0, 60), ylim = c(0,60)) +
+  labs(x = "Macrophyte Biomass (g)", y = "TDS (mg/l)") +
     theme_AJMS()
 
 combined1 <- ggarrange(PLOT1, PLOT2,
@@ -316,7 +320,7 @@ summarise(mean_temp = mean(Temperature),
 
 Table: The averages of all of the physio_chemical variables measured in each site
 -----------------------------------------------------------------------------------------------------------------------------------
-                   Temperature (°C)   Depth (cm)  pH    TDS (mg/l)    Macrophyte Biomass   Dissolved oxygen (mg/l)  Salinity (PSU)
+                   Temperature (°C)   Depth (cm)  pH    TDS (mg/l)    Macrophyte Biomass (g)   Dissolved oxygen (mg/l)  Salinity (PSU)
 ------------------- ----------------- -------  -------  -----  ------------------ ------------------------------ ----------------
                 
 
@@ -364,6 +368,40 @@ compare_means(Depth ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 compare_means(TDS ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 ```
 
+
+```{r}
+compare_means(Temperature ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+compare_means(Depth ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+compare_means(pH ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+compare_means(Dissolved_oxygen ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+compare_means(TDS ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+```
+
+Calculating the means and then calculating correlating this to the macrophyte biomass
+```{r}
+cor.test( ~ Temperature + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ Depth + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ pH + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ Dissolved_oxygen + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ TDS + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+```
+
+
 Making a correlation matrix between the environmental variables variables
 This can also be made into a table to add in the R document
 
@@ -403,13 +441,15 @@ Creating a Boxplot
 plot1 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = Macrophyte_Biomass, fill = Site), alpha = 0.3) +
+  labs(x = "Macrophyte Biomass (g)", y = "Site") +
   theme_AJMS()
   
 plot1
 
 plot2 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
-    geom_boxplot(aes(y = Temperature, fill = Site), alpha = 0.3) +
+    geom_boxplot(aes(y = Temperature, fill = Site), alpha = 0.3) + 
+  labs(x = "Temperature (°C)", y = "Site") +
   theme_AJMS()
   
 plot2
@@ -417,6 +457,7 @@ plot2
 plot3 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = Depth, fill = Site), alpha = 0.3) +
+  labs(x = "Depth (cm)", y = "Site") +
   theme_AJMS()
   
 plot3
@@ -424,6 +465,7 @@ plot3
 plot4 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = pH, fill = Site), alpha = 0.3) +
+  labs(x = "pH", y = "Site") +
   theme_AJMS()
   
 plot4
@@ -431,6 +473,7 @@ plot4
 plot5 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = TDS, fill = Site), alpha = 0.3) +
+  labs(x = "TDS (mg/l)", y = "Site") +
   theme_AJMS()
   
 plot5
@@ -438,6 +481,7 @@ plot5
 plot6 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = Dissolved_oxygen, fill = Site), alpha = 0.3) +
+  labs(x = "Dissolved Oxygen (mg/l)", y = "Site") +
   theme_AJMS()
   
 plot6
@@ -452,13 +496,13 @@ combined2
 Making a 3D scatter plot
 ```{r}
 library(plotly)
-x <- biomass <- R_assignment_AJ_$Macrophyte_Biomass
-y <- Temperature <- R_assignment_AJ_$Temperature
-z <- Depth <- R_assignment_AJ_$Depth
+z <- biomass <- R_assignment_AJ_$Macrophyte_Biomass
+x <- Temperature <- R_assignment_AJ_$Temperature
+y <- Depth <- R_assignment_AJ_$Depth
 
-scatter3D(x, y, z, pch = 18,  theta = 20, phi = 20,
-           xlab = "Macrophyte Biomass",
-          ylab ="Temperature", zlab = "Depth")
+Try_scatter <- scatter3D(x, y, z, pch = 18,  theta = 20, phi = 20,
+           xlab = " Temperature (°C)",
+          ylab ="Depth (cm)", zlab = "Macrophyte Biomass (g)")
 
 
 ```
