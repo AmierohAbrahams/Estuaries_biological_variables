@@ -22,12 +22,12 @@ library(rmarkdown)
 library(ggpubr)
 library(ggmap)
 library(dplyr)
+library(corrplot)
 library(ggpubr)
 library(ggmap)
 library(ggrepel)
 library(plot3D)
 library(Hmisc)
-library(corrplot)
 ```
 
 ## Abstract
@@ -46,7 +46,7 @@ The primary characteristic separating submerged macrophytes from their emergent 
 
 *Isolepis digitata* (Cyperaceae), is water sedge endemic to riverine systems within the Western and Eastern Cape provinces of South Africa (van Ginkel et al. 2011). The species exhibits a perennial growth habit, and is commonly found in dense tufted mats, on the surfaces of rocks within freshwater ecosystems, and typically found in the higher, fast flowing regions of rivers (Low 2009). The biomass accumulation and growth of this species has been closely linked to temperature, with temperatures above 13°C, promoting both the accumulation of biomass and the rate of growth of the species (Tshilla 2014). *I.digitata* has been shown to play an integral role in the maintenance and regulation of several aspects of freshwater ecosystems- this includes the maintenance of shore integrity (erosion control) while simultaneously maintain the quality of waters in which they are distributed (Tshilla 2014). Despite the significant role it plays in freshwater ecosystems, as well as its endemic status, the species has received very little attention, and as a consequence, we find that the available body of information regarding the autecology of the species remains scant (Low 2009). Studies by Nel et al. (2007) have highlighted the importance of prioritizing the conservation of riverine systems within the Western Cape Province, given the fact that up to 64% of the river ecosystems within the province are currently classified as endangered. The Krom River itself has undergone extensive transformation - a direct consequence of anthropogenic activities that have manifested in the form of altered community structures, decreased biodiversity within freshwater habitats and increased encroachment of invasive riparian vegetation. The aforementioned alterations to these habitats have inevitably led to a decrease in both macrophyte diversity and abundance (Wersal 2006). 
 
-Here we investigate the utility of the submerged macrophyte *I.digitata* as an indicator of ecosystem health, while highlighting the role that physical and chemical parameters of river water have on its biology. The study seeks to quantify and compare the physical and chemical parameters of between upper and intermediate sites within the Krom River; considering factors such as pH, depth (cm), temperature (°C), total dissolved oxygen (mg/l) and total dissolved solids (mg/l). In addition to this, the aforementioned physical and chemical parameters of river water will be correlated with biomass accumulation, in an effort to establish the influence that these environmental factors have on the biology on *I.digitata* individuals within the Krom River system.   
+Here we investigate the utility of the submerged macrophyte *I.digitata* as an indicator of ecosystem health, while highlighting the role that physical and chemical parameters of river water have on its biology. The study seeks to quantify and compare the physical and chemical parameters of between upper and intermediate sites within the Krom River; considering factors such as pH, depth (cm), temperature (°C), total dissolved oxygen (mg/l) and total dissolved solids (mg/l). In addition to this, the aforementioned physical and chemical parameters of river water will be correlated with biomass accumulation, in an effort to establish the influence that these environmental factors have on the biology on *I.digitata* individuals within the Krom River system.
 
 ## Materials and methods
 
@@ -65,8 +65,7 @@ The biomass of I. digitata was established through the collection of specimens f
 
 All statistical analyses conducted, were performed using R. v. 3.4.2. In all of the tests conducted, results were considered significant at p< 0.05. Prior to statistical analyses, the Shapiro-Wilks test was employed to establish the normality of the data. The results of the Shapiro-Wilks test were further corroborated by assessing the homoscedasticity of the data. Homoscedasticity of the data was established through the comparative analyses of variances of each of the variables. Where these differences were less than four or more times in size, it was assumed that the data was normally distributed. Where differences were greater than four or more times, we were able to conclude that the data was non-normally distributed. Analysis of the data using the aforementioned assessments revealed that the data collected relating to both the biomass of *I.digitata*, as well as the chemical/physical properties of river water, were in fact non-normally distributed. Given the nature of the variables being employed, differences between these variables were established using the Wilcox Rank-Sum test. The Wilcox Rank-Sum test is a non-parametric version of the two sample t-test. The Wilcox Rank some test was used to compare physio-chemcial environmental variables between the selected upper and intermediate sites within the Krom River, as well as differences in biomass accumulation of collected *I.digitata* specimens. Boxplots were constructed to provide a graphical representation of distributions relating to both the biological paramters of *I.digitata* (biomass) as well as physio-chemical properties of river water.The relationships between these variables were also graphically represented with a correlation matrix. Non-parametric correlation tests were conducted in an effort to establish the relation and relative impact of each of the aforementioned physio-chemcial impacts had on biological variables of *I.digitata*. Given the non-paramteric nature of the data collected, the Spearmans Rank Correlation was employed for the aforementioned effort. The Spearman Rank Correlation is the non-paramteric version of the Pearsons product-moment correlation.
 
-
-Creating a theme for all the graphs used in this script: This theme was created in order to meet all the South African Journal of Marine Science visualisation requirements.
+Creating a theme for all the graphs used in this script: This theme was created and meet all the South African Journal of Marine Science visualisation requirements.
 
 ```{r}
 
@@ -97,43 +96,16 @@ theme_AJMS <- function(AfricanJournalOfMarineScience) {
 }
 ```
 
-Now it is nessasary to load the data used in this assignment. Tis data comprise of *in situ* data collection as well as co-ordinates needed for mapping the locations.
+Now it is nessasary to load the data used in this assignment. This data comprise of *in situ* data collection as well as the coordinates needed for mapping the locations.
 
 ```{r load_files1, include=TRUE}
 R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
 Map_coordinates <- read_csv("Map_coordinates.csv")
-load("~/Documents/R_assignment/south_africa_coast.RData")
 load("~/Documents/R_assignment/sa_provinces.RData")
+load("~/Documents/R_assignment/south_africa_coast.RData")
 ```
 
-
-the "get-map" co-ordinates need to be altered, not clearly showing the coordinates
-```{r}
-map1<- get_map(location = c(lon = 19.895099, lat = -34.362008),
-                      zoom = 10, maptype = 'satellite')
-
-ggmap(map1) +
-  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
-             colour = "red", size = 1.5) +
-  labs(x = "Latitude", y = "Longitude", title = "Map showing the Cederberg region") +
-  theme(plot.title = element_text(hjust = 0.5))
-
-
-trial1 <- ggmap(map1) +
-  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
-             colour = "red", size = 1.5) +
-  labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
-  theme(plot.title = element_text(hjust = 0.5))
-
-
-
-new1 <- trial1 +
-  geom_text(data = Map_coordinates, aes(lon+0.0135, lat-0.0045, label = Site),
-            hjust = 1.05, vjust = 0.7,
-            size = 3, colour = "white")
-```
-
-Map showing the Cederberg region located within South Africa:
+Map showing the Cederberg region located within South Africa: 
 
 ```{r map_func, include=TRUE}
 mapping_plot <- function(df){
@@ -153,6 +125,31 @@ ggplot(aes(x = lon, y = lat)) +
 
 map_1 <- mapping_plot(df = Map_coordinates)
 map_1
+```
+
+Map showing the Krom River: The Krom River is a tributary of the Doring River which forms part of the Olifants-Doorn River catchment in the Cederberg, Western Cape.
+
+```{r}
+map1<- get_map(location = c(lon = 19.895099, lat = -34.362008),
+                      zoom = 10, maptype = 'satellite')
+
+ggmap(map1) +
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Latitude", y = "Longitude", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+trial1 <- ggmap(map1) +
+  geom_point(data = Map_coordinates, aes(x = lon+0.002, y = lat-0.007),
+             colour = "red", size = 1.5) +
+  labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+new1 <- trial1 +
+  geom_text(data = Map_coordinates, aes(lon+0.0135, lat-0.0045, label = Site),
+            hjust = 1.05, vjust = 0.7,
+            size = 3, colour = "white")
 ```
 
 Now we make a visualisation to reveal the relationship between each of the physiochemical parameters for both of the sites. This further shows the variation that occurs between each of the sites.
@@ -250,8 +247,6 @@ PLOT1 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Depth)
 PLOT1
 
 # angle of line shows the relationship
-
-
 # Macrophyte biomass and TDS
 PLOT2 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = TDS)) +
   geom_point() +
@@ -293,12 +288,12 @@ combined1 <- ggarrange(PLOT1, PLOT2,PLOT3, PLOT4,PLOT5,
                    ncol = 2, nrow = 3,
                    common.legend = TRUE)
 combined1
-
 ```
 
 Calculating the average for each of the physiochemical and biological parameters (Macrophyte biomass) for both of the sites.
 
 ```{r}
+
 R_assignment_AJ_ %>%
   group_by(Site) %>% 
 summarise(mean_temp = mean(Temperature),
@@ -310,20 +305,21 @@ summarise(mean_temp = mean(Temperature),
 ```
 
 Table1: The averages of all of the physio_chemical variables measured in each site
------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
                 Temperature (°C)   Depth (cm)    pH      TDS (mg/l)  Macrophyte Biomass (g)   Dissolved oxygen (mg/l)  Salinity (PSU)
 -------------  -----------------  -----------  -------  ------------ ---------------------- -------------------------  -------------  
                 
 
-Middle                   20.58         24.28    6.94      32.70             18.80                   18.61                  0.01
+Middle                   20.58         24.28    6.94      32.70             18.80                   6.37                  0.01
 
-Upper                    20.89         24.90    5.69      26.96             17.07                   6.60                   0.02
+Upper                    20.89         24.90    5.69      26.96             17.07                   6.60                  0.02
 
-------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
 
-Now we test to check the normality of our *in situ* collected data. To check the normality of the data we use the Shapiro-Wilk test. This test produces a W value and a p-value. We are only interested in the p-value as this is how we are to determine the normality of the data. If the p-value is above 0.05 we may assume the data to be normally distributed.
+Now we test to check the normality of our *in situ* collected data.
 
 ```{r}
+
 R_assignment_AJ_ %>% 
   group_by(Site) %>% 
   summarise(norm_temp = as.numeric(shapiro.test(Temperature)[2]),
@@ -332,10 +328,9 @@ R_assignment_AJ_ %>%
             norm_diss = as.numeric(shapiro.test(Dissolved_oxygen)[2]),
             norm_mac = as.numeric(shapiro.test(Macrophyte_Biomass)[2]),
             norm_depth = as.numeric(shapiro.test(Depth)[2]))
-```
-Testing homoscedasity
 
-```{r}
+# Testing homoscedasity
+
 R_assignment_AJ_ %>%
 group_by(Site) %>%
 summarise(sample_temp = var(Temperature),
@@ -346,9 +341,10 @@ summarise(sample_temp = var(Temperature),
           sample_diss = var(Dissolved_oxygen))
 ```
 
-The non-parametric version of a t-test is a Wilcox rank sum test. To perform this test in R we may again use compare_means() and specify the test we want: Wilcox test was done to assess whether the sites differed in terms of physiological parameters and also biological paramaters
+To check the normality of the data we used the Shapiro-Wilk test. This test produces a W value and a p-value. We are only interested in the p-value as this is how we are to determine the normality of the data. If the p-value is above 0.05 we may assume the data to be normally distributed. The non-parametric version of a t-test is a Wilcox rank sum test. To perform this test in R we may again use compare_means() and specify the test we want: Wilcox test was done to assess whether the sites differed in terms of physiological parameters and also biological paramaters
 
 ```{r}
+
 compare_means(Macrophyte_Biomass ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 compare_means(Temperature ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 compare_means(pH ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
@@ -357,19 +353,30 @@ compare_means(Depth ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 compare_means(TDS ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
 ```
 
-The correlation test was done to assess the impact of variables on biomass across both sites
+The non-parametric version of an ANOVA is a Kruskall-Wallis rank sum test: The correlation test was done to assess the impact of variables on biomass across both sites. As with the ANOVA, this first step with the Kruskall-Wallis test is not the last. We now run a post-hoc test on our results. For this a new package was installed called the pgirmess , which means we will need to load a new library pgirmess::kruskalmc().
 
 ```{r}
+
 compare_means(Temperature ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
 compare_means(Depth ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
 compare_means(pH ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
 compare_means(Dissolved_oxygen ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
 compare_means(TDS ~ Macrophyte_Biomass, data = R_assignment_AJ_, method = "kruskal.test")
+
+library(pgirmess)
+
+kruskalmc(Temperature ~ Macrophyte_Biomass, data = R_assignment_AJ_)
+kruskalmc(Depth ~ Macrophyte_Biomass, data = R_assignment_AJ_)
+kruskalmc(pH ~ Macrophyte_Biomass, data = R_assignment_AJ_)
+kruskalmc(Dissolved_oxygen ~ Macrophyte_Biomass, data = R_assignment_AJ_)
+kruskalmc(TDS ~ Macrophyte_Biomass, data = R_assignment_AJ_)
+
 ```
 
-Calculating the means and then calculating correlating this to the macrophyte biomass
+When the data we want to compare are not continuous, but rather ordinal, we will need to use a Spearman test. Here we compare all the physiochemical parameters with macrophyte biomass.
 
 ```{r}
+
 cor.test( ~ Temperature + Macrophyte_Biomass,
          data=R_assignment_AJ_,
          method = "spearman")
@@ -389,14 +396,12 @@ cor.test( ~ Dissolved_oxygen + Macrophyte_Biomass,
 cor.test( ~ TDS + Macrophyte_Biomass,
          data=R_assignment_AJ_,
          method = "spearman")
-
 ```
 
-
-Making a correlation matrix between the environmental variables variables
-This can also be made into a table to add in the R document
+Here we create a correlation matrix to compare each of the parameters between eachother.
 
 ```{r}
+
 corr_data <- read_csv("~/Documents/R_assignment/corr_data.csv")
 
 res2 <- rcorr(as.matrix(corr_data))
@@ -416,19 +421,21 @@ cor3<-rcorr(as.matrix(corr_data, use = "complete.obs"))
 flattenCorrMatrix(cor3$r, cor3$P)
 ```
 
+Plotting the correlation matrix, this provides a visual representation of all the parameters used within this study.
 
-PLotting the correlation matrix
 ```{r}
+
 try1 <- cor(corr_data, use = "complete.obs")
 try1
 
 # Making a visualisation
 corrplot(try1)
-
 ```
 
-Creating a Boxplot
+Now we create a boxplot visualisation to compare the variation of each of the parameters for both of the sites. This further shows the variation that occurs between each of the sites.
+
 ```{r}
+
 plot1 <- R_assignment_AJ_ %>%
     ggplot(aes(x = Site)) +
     geom_boxplot(aes(y = Macrophyte_Biomass, fill = Site), alpha = 0.3) +
@@ -483,8 +490,8 @@ combined2 <- ggarrange(plot1, plot2,plot3, plot4, plot5, plot6,
 combined2
 ```
 
+Making a 3D scatter plot: Here we compare depth, temperature and macrophyte biomass across both of the sites.
 
-Making a 3D scatter plot
 ```{r}
 library(plotly)
 z <- biomass <- R_assignment_AJ_$Macrophyte_Biomass
@@ -494,13 +501,10 @@ y <- Depth <- R_assignment_AJ_$Depth
 Try_scatter <- scatter3D(x, y, z, pch = 18,  theta = 20, phi = 20,
            xlab = " Temperature (°C)",
           ylab ="Depth (cm)", zlab = "Macrophyte Biomass (g)")
-
-
-
 ```
 
+Here we compare create a scatter plot to compare macrophyte biomass and depth. This was done to test whether or not macrophyte biomass is influenced by depth.
 
-normal scatter plot in R
 ```{r}
 plot(R_assignment_AJ_$Macrophyte_Biomass, R_assignment_AJ_$Depth, xlab= "Macrophyte Biomass (g)", ylab= "Depth  (cm)", pch=2, cex.main=1.5, frame.plot=FALSE , col="blue") +
   theme_AJMS()
@@ -512,13 +516,11 @@ Studies employing a functional method with regards to community ecology typicall
 
 These findings of this study in terms of physio-chemical paramters on biomass accumulation come in direct contrast with the current body of information relating to the effects of physio-chemical variables on the variation of macrophyte life form biomass. Studies by Madsen et al. 2001 emphasize the impact of chemical parameters such as total dissolved solid (TDS) on the accumulation of biomass, as particle resuspension induced by water movement has the capacity to limit the penetration of light through the water column, and may serve as a limiting factor to photosynthetic activity in submerged macrophytes. Furthermore, studies by Junk and Piedade 1993, have demonstrated the effects of increased water depth on both net primary productivity and subsequent biomass accumulation- which they attribute to the horizontal expansion of macrophytes in deeper waters. In terms of pH, we find that studies conducted by Takahashi and Asaeda 2012, reveal that there is an increased rate of photosynthetic activity and subsequent biomass accumulation in waters that are slightly acidic. The rationale behind this statement lies in the fact that acidic water inevitably shifts the equilibrium balance of bicarbonate (HCO¬¬¬¬¬3¬) free CO2, which results in a higher amount of free CO2 ¬being made available for uptake by submerged macrophytes. Moreover, Takahashi and Asaeda (s=2012) have reported the role of temperature on submerged macrophyte biomass accumulation, which states that the physical attributes such as temperature have the capacity to affect chemical parameters such as dissolved oxygen, where higher water temperatures may lead to a decreased ability of gases to remain in solution (Takahashi & Asaeda 2012) 
 
-Despite little to no influence of physio-chemical parameters on the accumulation of I.digitata biomass, our results indicate that physio-chemical parameters differed between the upper and intermediate sites along the Krom River, with significant differences observed with regards to physical parameters such as temperature and chemical parameters such as pH and total dissolved solids (TDS) ( reference the boxplots facet graph). Physical parameters such as depth and chemical parameters such as dissolved oxygen appear to be more or less consistent between the two sites (reference the boxplot facet graph).
+Despite little to no influence of physio-chemical parameters on the accumulation of I.digitata biomass, our results indicate that physio-chemical parameters differed between the upper and intermediate sites along the Krom River, with significant differences observed with regards to physical parameters such as temperature and chemical parameters such as pH and total dissolved solids (TDS) (reference the boxplots facet graph). Physical parameters such as depth and chemical parameters such as dissolved oxygen appear to be more or less consistent between the two sites (reference the boxplot facet graph).
 
 The indeterminacy of this study, regarding the influence of environmental variables on the biology of *I.digitata*, may be attributed to the employment of pseudoreplicates in the collected dataset. In addition to this results were constrained by limiting the sampling sites to two locations. This ultimately resulted in little to no variation in the data employed for statistical analysis. As a result of this we find that the results of our analysis are inadequate in explaining the relationship that both physical and chemical environmental parameters have on the accumulation of biomass in *I.digitata*. Despite a weakened potential of the data as a result of pseudoreplication, data was still capable of revealing differences in the chemical and physical parameters of river water between the two sites. Future studies would need to include a greater number of sampling sites in conjunction with a higher number of replicates derived from each of the sites, if we wish to better understand the dynamics of environmental variables of the biology of the submerged macrophyte *I.digitata*.
  
-
 ## References
-
 
 Akasaka M, Takamura N, Mitsuhashi H, Kadono Y (2010). Effects of land use on aquatic macrophyte diversity and water quality of ponds. Freshwater Biology, 55(4), pp.909–922.
 
@@ -575,33 +577,6 @@ Vié JC (2008). The IUCN Red list: a key conservation tool. In W: Vié JC, Hilto
 van Ginkel CE, Glen RP, Gordon-Gray KD, Cilliers CJ, Muasya M, Van Deventer PP (2011). Easy identification of some South African wetland plants (grasses, restios, sedges, rushes, bulrushes, eriocaulons and yellow-eyed grasses). Water Research Commission, Pretoria. pp 110.
 
 Wersal RM, Madsen JD, McMillan BR, Gerard PD (2006). Environmental factors affecting biomass and distribution of Stuckenia pectinata in the Heron Lake System, Minnesota, USA. Wetlands 26: 313–321.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
