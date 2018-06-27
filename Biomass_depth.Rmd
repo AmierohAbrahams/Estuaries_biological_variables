@@ -496,6 +496,7 @@ Try_scatter <- scatter3D(x, y, z, pch = 18,  theta = 20, phi = 20,
           ylab ="Depth (cm)", zlab = "Macrophyte Biomass (g)")
 
 
+
 ```
 
 
