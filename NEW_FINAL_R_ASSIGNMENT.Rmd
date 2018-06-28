@@ -1,0 +1,401 @@
+---
+title: "Investigate the impact of environmental variables on the biology of *Isolepis Digitata* in the Krom River (Cederberg Park, Western Cape, South Africa"
+author: "Amieroh Abrahams, Kim Scholtz and Yameen Badrodien"
+date: "20 June 2018"
+output: html_document
+  word_document:
+    toc: yes
+  html_document:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 5
+    highlight: default
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 6
+    highlight: zenburn
+    latex_engine: xelatex
+mainfont: PT Serif
+monofont: PT Mono
+language: Australian
+sansfont: PT Sans
+fontsize: 12pt
+---
+
+```{r prelim_opts, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "R>",
+  warning = FALSE,
+  message = FALSE
+)
+
+library(tidyverse)
+library(Hmisc)
+library(corrplot)
+library(ggplot2)
+library(knitr)
+library(tidyverse)
+library(rmarkdown)
+library(ggpubr)
+library(ggmap)
+library(dplyr)
+library(corrplot)
+library(ggpubr)
+library(ggmap)
+library(ggrepel)
+library(plot3D)
+library(Hmisc)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Materials and methods
+
+### Study area
+The study was conducted at the Krom River (Figure 1), which is an eastward flowing tributary originating from the Matjies River, within the Olifants-Doring River catchment area and exhibits a total length of approximately 15 km (Marr et al. 2012; Shelton et al. 2017). The Krom River is situated within the Cedarberg, located approximately 280 km outside of Cape, within the Western Cape Province, South Africa (de Moor & Day 2013). The area is marked by the presence of the Cape Fold Mountains, comprising shale and quartzitic sandstone which results in rivers of this region exhibiting waters which are typically oligotrophic in nature, and slightly acidic in terms of its pH (Goldblatt & Manning 2002; de Moor & Day 2013). The region is further characterized by a Mediterranean climate and thus, the region typically experiences hot dry summer months, followed by winter months which are cold and wet (Shelton et al. 2017). As such, the vast majority of rainfall experienced within this region occurs during the winter months, with the average maximum rainfall falling in the range of 250mm per annum (Garrow & Marr, 2012). This study identified two sites within the study area, that being, the upper site and the intermediate site. The sites were separated on the basis of depth, with the upper site exhibiting a greater depth when compared to the intermediate site, which was considerably shallower. The upper site was located above the Disa Pool, while the intermediate site was located directly adjacent to the campsite within the Krom River Cedarberg Park. All samples collected from the study area were recorded using a hand held GPS (Garmin eTrex 10). All sampling took place during February 2018, over a 4 day period, between 11h00 and 14h00.
+
+### Species distribution and aquatic habitat characterization
+
+A wide array of variables, relating to the physio-chemical properties of river water was recorded at each of the two sites. These variables included the temperature (°C), pH, electrical conductivity (μS cm-1), total dissolved solids (TDS: ppm) and salinity (PSU) were quantified in situ using a Hanna® HI 98129 pocket multi-function meter (HANNA Instruments, Inc.). A total of 10 replicates were taken at both the upper and intermediate sites, at a depth of 3 cm below the water surface, for a total of 3 minutes, or until the measurement appearing on the apparatus stabilized.   
+
+### Biomass quantification
+
+The biomass of *I. digitata* was established through the collection of specimens from both the upper and the intermediate sites within the study area. A total of 10 specimens were collected from either of the two sites, from a 25 cm x 25 cm quadrat. Following collection, specimens were identified to species level using a field guide. Collected submerged macrophytes were placed in zip-lock bags filled with 1/3 river water, and frozen at -12°C for further analyses in the laboratory. In the lab, macrophytes were thawed at room temperature, and rinsed using a sieve in an effort to remove any ambient material or sediment which may have been present on the specimens. The macrophytes were then dehydrated at 40°C for a period of 72 hours, using the Memmert 854 Schwabach® Model UL80 oven. The biomass (g) of dehydrated specimens was then measured to two decimal places using the Mettler Toledo® New Classic SG Model ML802E scale.  
+
+### Data modification
+
+Once measurements had been established for macrophyte and water specimens, the data was extrapolated (within the given range of the datasets for both upper and intermediate sites). This yielded a total of 40 pseudoreplicates per site, raising the total number of replicates for either site to n = 50. Pseudoreplication was performed in an effort to widen the range and variation of the values obtained from physical samples, thereby facilitating the statistical analysis of the data. 
+
+### Statistical analysis
+
+All statistical analyses conducted, were performed using R. v. 3.4.2. In all of the tests conducted, results were considered significant at p< 0.05. Prior to statistical analyses, the *Shapiro-Wilks Test* was employed to establish the normality of the data. The results of the *Shapiro-Wilks Test* were further corroborated by assessing the homoscedasticity of the data. Homoscedasticity of the data was established through the comparative analyses of variances of each of the variables. Where these differences were less than four or more times in size, it was assumed that the data was normally distributed. Where differences were greater than four or more times, we were able to conclude that the data was non-normally distributed. Analysis of the data using the aforementioned assessments revealed that the data collected relating to both the biomass of *I.digitata*, as well as the physio-chemical properties of river water, were in fact non-normally distributed. Given the nature of the variables being employed, differences between these variables were established using the *Wilcox Rank-Sum Test*. The *Wilcox Rank-Sum Test* is a non-parametric version of the two sample t-test. The *Wilcox Rank Sum Test* was used to compare physio-chemcial environmental variables, as well as differences in biomass accumulation of collected *I.digitata* specimens between the selected upper and intermediate sites within the Krom River. Boxplots were constructed to provide a graphical representation of distributions relating to both the biological parameters of *I.digitata* (biomass) as well as physio-chemical properties of river water.The relationships between these variables were also graphically represented with a correlation matrix. Non-parametric correlation tests were conducted in an effort to establish the relation and relative impact of each of the aforementioned physio-chemcial impacts had on biological variables (biomass) of *I.digitata*. Given the non-parametric nature of the data collected, the *Spearmans Rank Correlation* was employed for the aforementioned effort. *The Spearman Rank Correlation* is the non-parametric version of the Pearsons product-moment correlation.
+
+Creating a theme for all the graphs used in this script: This theme was created in order to meet all the South African Journal of Marine Science visualisation requirements.
+
+```{r}
+
+theme_AJMS <- function(AfricanJournalOfMarineScience) {
+  theme(
+    panel.background = element_rect(fill = NA),
+    panel.border = element_rect(size = 0.4, fill = NA),
+    text = element_text(family = "Arial"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    axis.title = element_text(size = 9),
+    axis.ticks = element_line(size = 0.5),
+    legend.position = "right",
+    legend.direction = "vertical",
+    legend.title = element_text(family = "Arial", size = 9),
+    legend.text = element_text(family = "Arial", size = 9),
+    legend.key = element_blank(),
+    legend.key.height = unit(.3, "cm"),
+    legend.box.spacing = unit(0.4, "cm"),
+    legend.background = element_blank(),
+    plot.title = element_text(size = 9, hjust = 0),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 9),
+    axis.ticks.length = unit(-0.2, "cm"),
+    axis.text.x = element_text(margin = unit(c(0.25, 0.5, 0.5, 0.5), "cm"), vjust = 0.35, angle = 450),
+    axis.text.y = element_text(margin = unit(c(0.5, 0.3, 0.5, 0.5), "cm"))
+  )
+}
+```
+
+At this point it was required that the dataset for the study was imported into R Studio 1.1.423. This data comprised teh *in situ* samples collected from the study site, along with the generated pseudo-replicates, as well as co-oordinates needed for generating localised maps of the study area. 
+
+```{r load_files1, include=TRUE}
+R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
+Map_coordinates <- read_csv("Map_coordinates.csv")
+load("~/Documents/R_assignment/sa_provinces.RData")
+load("~/Documents/R_assignment/south_africa_coast.RData")
+```
+
+Map showing the Cederberg region located within South Africa:
+
+```{r, include=TRUE, fig.cap = "Figure 1: A satellite map of the study area located within the Krom River, Krom River Cederberg Park, in the Western Cape province of South Africa"}
+
+mapping_plot <- function(df){
+  mapping <- df %>% 
+ggplot(aes(x = lon, y = lat)) +
+  geom_polygon(data = south_africa_coast, aes(group = group), fill = "grey70") +
+  coord_cartesian(xlim = c(12, 36), ylim = c(-38, -26)) +
+  geom_path(data = sa_provinces, aes(group = group)) +
+  geom_point(data = df)  +
+  geom_label_repel(data =df, aes(x = lon, y = lat, label = Site), 
+                   size = 3, box.padding = 2, nudge_x = -0.5, nudge_y = 0.2, segment.alpha = 0.4) +
+  theme(axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank())
+  return(mapping)
+}
+
+map_1 <- mapping_plot(df = Map_coordinates)
+map_1
+
+map1<- get_map(location = c(lon = 19.275, lat = -32.535),zoom = 15, maptype = 'satellite')
+
+trial1 <- ggmap(map1) +
+  geom_point(data = Map_coordinates, aes(x = lon, y = lat),
+             colour = "red", size = 4) +
+  labs(x = "Lat", y = "Lon", title = "Map showing the Cederberg region") +
+  theme(plot.title = element_text(hjust = 0.5))
+ 
+
+new1 <- trial1 +
+  geom_text(data = Map_coordinates, aes(lon, lat, label = Site),
+            hjust = 1.09, vjust = 0.5,
+            size = 5, colour = "white")
+plot(new1)
+
+```
+
+The next step was to visualise the data in the form of boxplots, which illustrated the physio-chemcial parameters of either site. This gave us an idea of the variation in environmental variables of both the upper and intermediate sites within the study area.
+
+```{r, include=TRUE, fig.cap = "Figure 2: Boxplots illustrating the variation in physical( temperature [Degrees Celsius] and depth[cm]), chemical (pH, total dissolved solids (TDS: mg/l) and total dissolved oxygen (mg/l) between the selected upper and intermediate sites of the Krom River, Krom River Cederberg Park."}
+dat1 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.pH = mean(pH),
+            sd.pH = sd(pH))
+
+plot_A <- ggplot(dat1, aes(x = Site, y = mn.pH)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.pH - sd.pH, 
+                    ymax = mn.pH + sd.pH)) +
+  labs(x = "Site", y = "pH") +
+  theme_AJMS()
+
+dat2 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Dissolved_oxygen = mean(Dissolved_oxygen),
+            sd.Dissolved_oxygen = sd(Dissolved_oxygen))
+
+plot_B <- ggplot(dat2, aes(x = Site, y = mn.Dissolved_oxygen)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Dissolved_oxygen - sd.Dissolved_oxygen, 
+                    ymax = mn.Dissolved_oxygen + sd.Dissolved_oxygen)) +
+  labs(x = "Site", y = "Dissolved Oxygen (mg/l)") +
+  theme_AJMS()
+
+dat3 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Temperature = mean(Temperature),
+            sd.Temperature = sd(Temperature))
+
+plot_C <- ggplot(dat3, aes(x = Site, y = mn.Temperature)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Temperature- sd.Temperature, 
+                    ymax = mn.Temperature + sd.Temperature)) +
+  labs(x = "Site", y = "Temperature (°C)") +
+  theme_AJMS()
+
+dat4 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Macbio = mean(Macrophyte_Biomass),
+            sd.Macbio = sd(Macrophyte_Biomass))
+
+plot_D <- ggplot(dat4, aes(x = Site, y = mn.Macbio)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Macbio - sd.Macbio, 
+                    ymax = mn.Macbio + sd.Macbio)) +
+  labs(x = "Site", y = "Macrophyte Biomass (g)") +
+  theme_AJMS()
+
+dat5 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.Depth = mean(Depth),
+            sd.Depth = sd(Depth))
+
+plot_E <- ggplot(dat5, aes(x = Site, y = mn.Depth)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.Depth - sd.Depth, 
+                    ymax = mn.Depth + sd.Depth)) +
+  labs(x = "Site", y = "Depth (cm)") +
+  theme_AJMS()
+
+dat6 <- R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(mn.TDS = mean(TDS),
+            sd.TDS = sd(TDS))
+
+plot_F <- ggplot(dat6, aes(x = Site, y = mn.TDS)) +
+  geom_col(aes(fill = Site)) +
+  geom_errorbar(aes(ymin = mn.TDS - sd.TDS, 
+                    ymax = mn.TDS + sd.TDS)) +
+  labs(x = "Site", y = "TDS (mg/l)") +
+  theme_AJMS()
+
+
+Final <- ggarrange(plot_A, plot_B,plot_C,plot_D,plot_E, plot_F,
+                   ncol = 3, nrow = 2,
+                   common.legend = TRUE)
+Final
+```
+
+The next step was to create a visualisation of the relationship between the biomass of *I.digitata* and each of the physio-chemical paramters of river water for both the upper and intermediate sites.
+
+```{r, include=TRUE, fig.cap = "Figure 3: Scatterplots exhibiting the realtionship between physical (temperature[degrees celcius] and depth [cm] and chemcial(pH, TDS [mg/l] and total dissolved oxygen[mg/l] on the accumulation of biomass in *I.digitata* individuals within the Krom River, Krom River Cederberg Park))"}
+# Areas and adding trend
+# Macrophyte Biomass
+PLOT1 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Depth)) +
+  geom_point() +
+  coord_equal(xlim = c(0, 60), ylim = c(0,60)) +
+  labs(x = "Depth (cm)", y ="Macrophyte Biomass (g)") +
+    theme_AJMS()
+PLOT1
+
+# angle of line shows the relationship
+# Macrophyte biomass and TDS
+PLOT2 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = TDS)) +
+  geom_point() +
+  coord_equal(xlim = c(0, 60), ylim = c(0, 60)) +
+  labs(x = "TDS (mg/l)", y = "Macrophyte Biomass (g)") +
+    theme_AJMS()
+PLOT2
+
+# angle of line shows the relationship
+
+# Macrophyte biomass and pH
+PLOT3 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = pH )) +
+  geom_point() +
+  coord_equal(xlim = c(0, 10), ylim = c(0,60)) +
+  labs(x = "pH", y = "Macrophyte Biomass (g)") +
+    theme_AJMS()
+PLOT3
+# angle of line shows the relationship
+
+# Macrophyte biomass and temperature
+PLOT4 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Temperature)) +
+  geom_point() +
+  coord_equal(xlim = c(10, 30), ylim = c(0, 60)) +
+  labs(x = "Temperature (Deg Celcius)", y ="Macrophyte Biomass (g)" ) +
+    theme_AJMS()
+PLOT4
+# angle of line shows the relationship
+
+# Macrophyte biomass and dissolved oxygen
+PLOT5 <-ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Dissolved_oxygen)) +
+  geom_point() +
+  coord_equal(xlim = c(0, 10), ylim = c(0,60)) +
+  labs(x ="Dissolved Oxygen (mg/l)" , y ="Macrophyte Biomass (g)" ) +
+    theme_AJMS()
+
+PLOT5
+
+combined1 <- ggarrange(PLOT1, PLOT2,PLOT3, PLOT4,PLOT5, 
+                   ncol = 2, nrow = 3,
+                   common.legend = TRUE)
+combined1
+
+```
+
+Calculating the combined average (upper and intermdiate sites) for each of the physiochemical and biological parameters (Macrophyte biomass).
+
+```{r, include=FALSE}
+
+R_assignment_AJ_ %>%
+  group_by(Site) %>% 
+summarise(mean_temp = mean(Temperature),
+          mean_pH = mean(pH),
+          mean_depth = mean(Depth),
+          mean_TDS = mean(TDS),
+          mean_mac = mean(Macrophyte_Biomass),
+          mean_diss = mean(Dissolved_oxygen))
+```
+
+Table 1: Summary of averaged physio-chemical and biological parameters for the upper and intermediate sites located along the Krom River.
+--------------------------------------------------------------------------------------------------------------------------------------
+                Temperature (°C)   Depth (cm)    pH      TDS (mg/l)  Macrophyte Biomass (g)   Dissolved oxygen (mg/l)  Salinity (PSU)
+-------------  -----------------  -----------  -------  ------------ ---------------------- -------------------------  -------------  
+                
+
+Middle                   20.58         24.28    6.94      32.70             18.80                   6.37                  0.01
+
+Upper                    20.89         24.90    5.69      26.96             17.07                   6.60                  0.02
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Now we test to check the normality of our the dataset, which includes *in situ* measurements as well as the pseudoreplicated measurements.
+
+```{r}
+
+R_assignment_AJ_ %>% 
+  group_by(Site) %>% 
+  summarise(norm_temp = as.numeric(shapiro.test(Temperature)[2]),
+            norm_TDS = as.numeric(shapiro.test(TDS)[2]),
+            norm_pH = as.numeric(shapiro.test(pH)[2]),
+            norm_diss = as.numeric(shapiro.test(Dissolved_oxygen)[2]),
+            norm_mac = as.numeric(shapiro.test(Macrophyte_Biomass)[2]),
+            norm_depth = as.numeric(shapiro.test(Depth)[2]))
+
+# Testing homoscedasity
+
+R_assignment_AJ_ %>%
+group_by(Site) %>%
+summarise(sample_temp = var(Temperature),
+          sample_pH = var(pH),
+          sample_TDS = var(TDS),
+          sample_mac = var(Macrophyte_Biomass),
+          sample_depth = var(Depth),
+          sample_diss = var(Dissolved_oxygen))
+```
+
+To test for normality of the data we used the Shapiro-Wilk test. This test produces a W value and a p-value. We are only interested in the p-value as this is how we are to determine the normality of the data. If the p-value is above 0.05 we may assume the data to be normally distributed. The non-parametric version of a t-test is a Wilcox rank sum test. To perform this test in R we may again use compare_means() and specify the test we want: Wilcox test was done to assess whether the sites differed in terms of physiological parameters and also biological paramaters
+
+```{r, include=FALSE}
+
+compare_means(Macrophyte_Biomass ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Temperature ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(pH ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Dissolved_oxygen ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(Depth ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+compare_means(TDS ~ Site, data = R_assignment_AJ_, method = "wilcox.test")
+```
+
+Table 2: Statistical outputs (p-values) of the Wilcox test conducted on the upper and intermediate sites in an effort to establish differences in physical (temperature[degrees celcius], depth [cm]), chemical (pH, total dissolved solids [TDS: mg/l] and total dissolved oxygen[mg/l] and biological parameters [biomass: g]).
+----------------------------------------------------------------------------------
+                                   Group 1   Group 2      p        
+-------------  ---------------- ---------- -------  -----------    
+                
+
+Temperature (°C)                   Upper     Middle    0.0010   
+
+Depth (cm)                         Upper     Middle    0.4430
+
+pH                                 Upper     Middle     1.31e-17	
+
+TDS (mg/l)                         Upper     Middle     3.87e-14	
+
+Macrophyte Biomass (g)             Upper     Middle     0.0502    
+
+Dissolved oxygen (mg/l)            Upper     Middle     0.0670
+-----------------------------------------------------------------------------------
