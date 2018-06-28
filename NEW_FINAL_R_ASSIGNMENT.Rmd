@@ -1,5 +1,5 @@
 ---
-title: "Investigate the impact of environmental variables on the biology of *Isolepis Digitata* in the Krom River (Cederberg Park, Western Cape, South Africa"
+title: "Investigating the impact of environmental variables on the biology of *Isolepis Digitata* in the Krom River (Cederberg Park, Western Cape, South Africa"
 author: "Amieroh Abrahams, Kim Scholtz and Yameen Badrodien"
 date: "20 June 2018"
 output: html_document
@@ -52,32 +52,29 @@ library(plot3D)
 library(Hmisc)
 ```
 
+## Abstract
 
+*Isolepis digitata* and water specimens were sampled from two sites within the Krom River freshwater ecosystem in the Krom River Cederberg Park, located in the Western Cape Province of South Africa during February 2018. A comparative analysis of the physical (temperature, depth), chemical (sediment, pH, total dissolved oxygen) properties of river water, as well as biological parameters (biomass accumulation of *I.digitata*) revealed the relationships between environmental variable and the biology of *I.digitata*. A comparison of the upper and intermediate sites, in terms of the physio-chemical parameters indicated that sites differed in terms of physical attributes such as temperature, as well as chemical attributes such as pH and total dissolved solids, while features such as depth and total dissolved oxygen appeared exhibited no significant differences. Investigation of the biological attributes of *I.digitata*, revealed that the accumulation of biomass exhibited by individuals sampled along the Krom River, were consistent, and exhibited little to no variation between the upper and intermediate sites. Correlation tests between physio-chemical attributes of river water on the biology of *I.digitata*, indicated that biomass accumulation of *I.digitata* within the Krom River, operated independently of measured physical (temperature, depth) and chemical (sediment, pH, total dissolved oxygen) environmental factors, and may possibly be governed by other environmental variables that were not investigated here.
 
+## Introduction 
 
+Freshwater is regarded as perhaps the single most important natural resource required by human beings. The role of freshwater is amplified in impoverished countries, as freshwater ecosystems provide an array of indispensable natural resources which inevitably influence human livelihood and health (Covich et al. 2004). These freshwater ecosystems also support a cornucopia of plant and animal assemblages, contributing significantly to biodiversity, which further contributes to the value of the types of ecosystems in terms of resource provision (Dudgeon et al. 2006; Vié 2008). We find that the proportion of biodiversity sustained by these ecosystems is significantly high, despite the fact that freshwater ecosystems encompass a mere 0.8% of the Earth’s surface area, and constitute 0.01% of the Earth’s freshwater (Gleick et al. 1996). Moreover, it is established that these freshwater ecosystems, serve as habitats to at least 126 000 described species of plants and animals, accounting for at least 7% of all described species of living organisms, which is considerably high given the relatively small area of this type of habitat (Dudgeon et al. 2006; Bailan et al. 2010). Despite the ecological value of these habitats, these types of ecosystems have in recent times, exhibited accelerated rates of biodiversity loss (Dudgeon et al. 2006). 
 
+Based on studies by Dudgeon et al (2006), it was realized that these freshwater ecosystems are currently being subjected to an array of threats which include habitat transformation and degradation, increased levels of water pollution, the overexploitation of biota, as well as a number of impacts that are closely associated with water abstraction and subsequent flow modification coming as a direct consequence of man-made water retention reservoirs. It becomes woefully apparent that factors such as precipitation, temperature and run off patterns, a product of global climate change, may inevitably exacerbate the aforementioned threats and consequently lead to the physical isolation and fragmentation of these types of ecosystems (Dudgeon et al. 2006). These threats coupled with the aforementioned factors have ultimately led to significant decreases in biodiversity within these freshwater ecosystems. According to Darwall et al (2011), at least 20% of amphibian biodiversity, 27% of mollusk diversity and 30 percent of freshwater fish diversity are currently classified as threatened in accordance with the IUCN Red List, which goes on to describe freshwater ecosystems as perhaps the most endangered ecosystems in the globe. Studies by Vié (2008), reveal that freshwater ecosystems serve as habitats to at least 65 000 species of invertebrates, 12 000 species of freshwater fish and 500 species of amphibians. While aquatic plant species have been identified as contributing significantly less to biodiversity within these types of habitats, their presence in freshwater ecosystems have been highlighted given their involvement in the provision of a multitude of ecosystem services as well as playing an integral role in crucial ecological processes (Lacoul & Freedman 2006; Wersal et al. 2006; Bornette & Puijalon 2009).
 
+Studies by Balian et al (2010) have shown that macrophytes encompass a total of 2614 species within freshwater ecosystems and exhibiting low levels of diversity given the fact that they comprise a mere 2% of all described freshwater biota, and represent 1% of all described vascular plant biota. Macrophytes typically enjoy cosmopolitan distributions, with the highest levels of endemism and species diversity being exhibited in temperate regions across the globe (Bailan et al. 2010). It should however be noted that certain tropical and subtropical regions may exhibit significantly high levels of endemism and species richness- these include areas within South America, where at least 81 % of these organism are considered to be endemic, as well as areas within Southern Africa, where they exhibit roughly 20% endemism (Bailan et al. 2010). Within South Africa, we find high diversity of wetland macrophytes, with centers for diversity and endemism being concentrated to areas of the Western Cape and Kwa-Zulu Natal (Darwall et al, 2009). Despite the high levels of diversity within these regions, it is realized that the existing body of information currently available for submerged species of macrophytes remains scant, as the focus of previous studies have generally directed their attention towards floating and emergent species. 
 
+The primary characteristic separating submerged macrophytes from their emergent and floating counterparts lies in the fact that they exist entirely beneath the surface of the water. Submerged macrophytes are characterized by their ability to alter and maintain various components of the freshwater habitat, including the regulation of turbidity within water columns, physio-chemical properties of water while simultaneously acting as carbon reservoirs (Scheffer & Jeppeson 2007; Kennedy et al. 2015). It is realized that the manner in which macrophytes function within their respective ecosystems, may ultimately be governed by the structural attributes of each individual population, as well as factors such as distribution, species composition and diversity (Kaul et al. 1978). Moreover, we find that these aforementioned factors are ultimately established by environmental factors such as the temperature, pH, light, depth, nutrient and gas composition of the waters in which they are distributed (Barko & Smart, 1986).  Given the close biophysical relationship between these organisms and their environment, we find that they are often valuable indicators of ecosystem function and health, as macrophyte composition and biomass are directly correlated with certain environmental factors (Lacoul & Freedman, 2006)
 
+*Isolepis digitata* (*Cyperaceae*), is water sedge endemic to riverine systems within the Western and Eastern Cape provinces of South Africa (van Ginkel et al. 2011). The species exhibits a perennial growth habit, and is commonly found in dense tufted mats, often attached to  the surfaces of rocks within freshwater ecosystems, and typically found in the higher, fast flowing regions of rivers (Low 2009). The biomass accumulation and growth of this species has been closely linked to temperature, with temperatures above 13°C, promoting both the accumulation of biomass and the rate of growth of the species (Tshilla 2014). *I.digitata* has been shown to play an integral role in the maintenance and regulation of several aspects of freshwater ecosystems - this includes the maintenance of shore integrity (erosion control) while simultaneously maintain the quality of waters in which they are distributed (Tshilla 2014). Despite the significant role it plays in freshwater ecosystems, as well as its endemic status, the species has received very little attention, and as a consequence, we find that the available body of information regarding the autecology of the species remains scant (Low 2009). Studies by Nel et al. (2007) have highlighted the importance of prioritizing the conservation of riverine systems within the Western Cape Province, given the fact that up to 64% of the river ecosystems within the province are currently classified as endangered. The Krom River itself has undergone extensive transformation - a direct consequence of anthropogenic activities that have manifested in the form of altered community structures, decreased biodiversity within freshwater habitats and increased encroachment of invasive riparian vegetation. The aforementioned alterations to these habitats have inevitably led to a decrease in both macrophyte diversity and abundance (Wersal 2006). 
 
+Here we investigate the utility of the submerged macrophyte *I.digitata* and its biology as an indicator of ecosystem health, while highlighting the role that physical and chemical parameters of river water have on its biology. The study seeks to quantify and compare the physical and chemical parameters of between upper and intermediate sites within the Krom River; considering factors such as pH, depth (cm), temperature (°C), total dissolved oxygen (mg/l) and total dissolved solids (mg/l). In addition to this, the aforementioned physical and chemical parameters of river water will be correlated with biomass accumulation, in an effort to establish the influence that these environmental factors have on the biology on *I.digitata* individuals within the Krom River system. 
 
+*Hypothesis Formulation*
 
+H0: The accumulation of biomass of *I.digitata* is independant of physical (temperature and depth) and chemical(pH, total dissolved solid[TDS] and total dissolved oxygen).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+H1: The accumulation of biomass of *I.digitata* is dependant on physical (temperature and depth) and chemical(pH, total dissolved solid[TDS] and total dissolved oxygen)
 
 ## Materials and methods
 
@@ -399,3 +396,79 @@ Macrophyte Biomass (g)             Upper     Middle     0.0502
 
 Dissolved oxygen (mg/l)            Upper     Middle     0.0670
 -----------------------------------------------------------------------------------
+
+The *Spearman Rank Correlation*, a non-parametric test, was conducted in order to collectively establish the relationship between each of the environmental variables on biomass accumulation within the study site.
+
+```{r, include=FALSE}
+
+cor.test( ~ Temperature + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ Depth + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ pH + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ Dissolved_oxygen + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+
+cor.test( ~ TDS + Macrophyte_Biomass,
+         data=R_assignment_AJ_,
+         method = "spearman")
+```
+
+Table 3: Statistical outputs of the *Spearman Rank Coefficient Correlation Test* depicting the relationship of environmental variables and biomass accumulation in *I.digitata*
+------------------------------------------------------------------------------------------------------------------------------------
+                       Groups                                 S              p-value          
+--------------------------------------------------------  ---------------- --------------- 
+
+Temperature (°C) and Macrophyte Biomass (g)                  179140            0.46     
+
+Depth (cm)  and Macrophyte Biomass (g)                       198680            0.06       
+
+pH and Macrophyte Biomass (g)                                144160            0.18                  
+
+TDS (mg/l) and Macrophyte Biomass (g)                        153950            0.45
+  
+Dissolved oxygen (mg/l)  and Macrophyte Biomass (g)          182770            0.34
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Here we create a correlation matrix to compare each of the parameters between eachother.
+
+```{r}
+
+corr_data <- read_csv("~/Documents/R_assignment/corr_data.csv")
+
+res2 <- rcorr(as.matrix(corr_data))
+res2
+
+flattenCorrMatrix <- function(cormat, pmat) {
+  ut <- upper.tri(cormat)
+  data.frame(
+    row = rownames(cormat)[row(cormat)[ut]],
+    column = rownames(cormat)[col(cormat)[ut]],
+    cor  =(cormat)[ut],
+    p = pmat[ut]
+  )
+}
+
+cor3<-rcorr(as.matrix(corr_data, use = "complete.obs"))
+flattenCorrMatrix(cor3$r, cor3$P)
+```
+
+
+Plotting the correlation matrix. This provides a graphical representation of all the environmental variables investigated in this study (both chemical and physical) and their relationship with the accumulation of biomass of the submerged macrophyte *I.digitata*.
+
+```{r,include=True, fig.cap = "Figure 4: Correlation matrix of environmental variables on the accumulation of biomass of *I.digitata* within the upper and intermediate sites of the Krom River, Cederberg Park)}
+
+try1 <- cor(corr_data, use = "complete.obs")
+try1
+
+# Making a visualisation
+corrplot(try1)
+```
