@@ -133,8 +133,8 @@ At this point it was required that the dataset for the study was imported into R
 ```{r load_files1, include=TRUE}
 R_assignment_AJ_ <- read_csv("R_assignment(AJ).csv")
 Map_coordinates <- read_csv("Map_coordinates.csv")
-load("~/Documents/R_assignment/sa_provinces.RData")
-load("~/Documents/R_assignment/south_africa_coast.RData")
+load("sa_provinces.RData")
+load("~south_africa_coast.RData")
 ```
 
 Map showing the Cederberg region located within South Africa:
