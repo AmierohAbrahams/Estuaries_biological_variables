@@ -20,11 +20,11 @@ output: html_document
     fig_width: 6
     highlight: zenburn
     latex_engine: xelatex
-mainfont: PT Serif
-monofont: PT Mono
+mainfont: Arial
+monofont: Arial
 language: Australian
-sansfont: PT Sans
-fontsize: 12pt
+sansfont: Arial
+fontsize: 11pt
 ---
 
 ```{r prelim_opts, echo=FALSE}
@@ -141,7 +141,7 @@ load("south_africa_coast.RData")
 
 Map showing the Cederberg region located within South Africa:
 
-```{r, include=TRUE, fig.cap = "Figure 1: A satellite map of the study area located within the Krom River, Krom River Cederberg Park, in the Western Cape province of South Africa"}
+```{r, include=TRUE, fig.cap = "Figure 1: Maps of the study area located within the Krom River, Krom River Cederberg Park, in the Western Cape province of South Africa"}
 
 mapping_plot <- function(df){
   mapping <- df %>% 
@@ -180,7 +180,7 @@ plot(new1)
 
 The next step was to visualise the data in the form of boxplots, which illustrated the physico-chemcial parameters of either site. This gave us an idea of the variation in environmental variables of both the upper and intermediate sites within the study area.
 
-```{r, include=TRUE, fig.cap = "Figure 2: Boxplots illustrating the variation in physical( temperature [Degrees Celsius] and depth[cm]), chemical (pH, total dissolved solids (TDS: mg/l) and total dissolved oxygen (mg/l) between the selected upper and intermediate sites of the Krom River, Krom River Cederberg Park."}
+```{r, include=TRUE, fig.cap = "Figure 2: Boxplots illustrating the variation in physical, chemical and total dissolved oxygen (mg/l) between the selected upper and intermediate sites of the Krom River, Krom River Cederberg Park."}
 dat1 <- R_assignment_AJ_ %>% 
   group_by(Site) %>% 
   summarise(mn.pH = mean(pH),
@@ -262,7 +262,7 @@ Final
 
 The next step was to create a visualisation of the relationship between the biomass of *I.digitata* and each of the physico-chemical paramters of river water for both the upper and intermediate sites.
 
-```{r, include=TRUE, fig.cap = "Figure 3: Scatterplots exhibiting the realtionship between physical (temperature[degrees celcius] and depth [cm] and chemcial(pH, TDS [mg/l] and total dissolved oxygen[mg/l] on the accumulation of biomass in *I.digitata* individuals within the Krom River, Krom River Cederberg Park))"}
+```{r, include=TRUE, fig.cap = "Figure 3: Scatterplots exhibiting the relationship between physical and chemcial parameters on the accumulation of biomass in *I.digitata* individuals within the Krom River, Krom River Cederberg Park"}
 # Areas and adding trend
 # Macrophyte Biomass
 PLOT1 <- ggplot(data = R_assignment_AJ_, aes(y = Macrophyte_Biomass , x = Depth)) +
@@ -476,7 +476,7 @@ corrplot(try1)
 ```
 ## Discussion
 
-Studies employing a functional method with regards to community ecology typically direct their attention to the relationships exhibited between abiotic factors (physical and chemical parameters) and the composition and richness of macrophyte growth forms within freshwater ecosystems (e.g. Akasaka et al. 2010; Alahuta & Heino 2013). Hudon et al. 2000 suggest that the potential impacts of these environmental variables on the accumulation and variation in biomass amongst macrophytes, as basic as it may be, often goes under looked and is grossly underestimated. The application of these types of relationships have become more relevant in recent years, as the utility and value of these species as indicator species of both ecosystem function and health has become more apparent (Lacoul and Freedman, 2006). The main findings of this study reveal that the chemical and physical variables selected in this study, are incapable of explaining variation in the biomass of the submerged macrophyte *I.digitata* along the two selected sites (upper and intermediate) within the site. Considering these findings, it is realized that our hypothesis that the biology of the submerged macrophyte *I.digitata* was is dependant on physico-chemical attributes of its aquatic environment is subsequently rejected. The approaches employed in this study revealed the following: Firstly, despite significant differences in physico-chemical parameters (temperature, pH and TDS) between the selected upper and intermediate sites, no significant differences in the biomass of *I.digitata* were observed between the two sites (*Wilcox Rank-Sum Test* p > 0.05) (see Fig. 2 and Table 2).Moreover, the results emphasize that the biomass accumulation of the submerged macrophyte *I.digitata*, is weakly associated with physico-chemical parameters investigated in this study (See Fig. 3 and 4). *Spearman Rank Correlation* tests revealed that biomass accumulation of *I.digitata* exhibited weak associations with physical parameters such as depth and temperature, and with chemical parameters such as pH, total dissolved solid (TDS) and total dissolved oxygen (*Spearman Rank Correlation* p > 0.05) (See Table: 3). These findings may be corroborated with mean values obtained for each of the physical and chemical parameters obtained from either site (see Table: 1) 
+Studies employing a functional method with regards to community ecology typically direct their attention to the relationships exhibited between abiotic factors (physical and chemical parameters) and the composition and richness of macrophyte growth forms within freshwater ecosystems (e.g. Akasaka et al. 2010; Alahuta & Heino 2013). Hudon et al. 2000 suggest that the potential impacts of these environmental variables on the accumulation and variation in biomass amongst macrophytes, as basic as it may be, often goes under looked and is grossly underestimated. The application of these types of relationships have become more relevant in recent years, as the utility and value of these species as indicator species of both ecosystem function and health has become more apparent (Lacoul and Freedman, 2006). The main findings of this study reveal that the chemical and physical variables selected in this study, are incapable of explaining variation in the biomass of the submerged macrophyte *I.digitata* along the two selected sites (upper and intermediate) within the site. Considering these findings, it is realized that our hypothesis that the biology of the submerged macrophyte *I.digitata* was is dependant on physico-chemical attributes of its aquatic environment is subsequently rejected. The approaches employed in this study revealed the following: Firstly, despite significant differences in physico-chemical parameters (temperature, pH and TDS) between the selected upper and intermediate sites, no significant differences in the biomass of *I.digitata* were observed between the two sites (*Wilcox Rank-Sum Test* p > 0.05) (Fig. 2 and Table 2).Moreover, the results emphasize that the biomass accumulation of the submerged macrophyte *I.digitata*, is weakly associated with physico-chemical parameters investigated in this study (Fig. 3 and 4). *Spearman Rank Correlation* tests revealed that biomass accumulation of *I.digitata* exhibited weak associations with physical parameters such as depth and temperature, and with chemical parameters such as pH, total dissolved solid (TDS) and total dissolved oxygen (*Spearman Rank Correlation* p > 0.05) (Table: 3). These findings may be corroborated with mean values obtained for each of the physical and chemical parameters obtained from either site (Table: 1) 
 
 The findings of this study come in direct contrast with previous literature relating to the effects of environmental variables on the variation of macrophyte life form biomass. Studies by Madsen et al. 2001 emphasize the impact of chemical parameters such as total dissolved solid (TDS) on the accumulation of biomass, as particle resuspension induced by water movement has the capacity to limit the penetration of light through the water column, and may serve as a limiting factor to photosynthetic activity in submerged macrophytes. Furthermore, studies by Junk and Piedade 1993, have demonstrated the effects of increased water depth on both net primary productivity and subsequent biomass accumulation- which they attribute to the horizontal expansion of macrophytes in deeper waters. In terms of pH, we find that studies conducted by Takahashi and Asaeda (2012), reveal that there is an increased rate of photosynthetic activity and subsequent biomass accumulation in waters that are slightly acidic. The rationale behind this statement lies in the fact that acidic water inevitably shifts the equilibrium balance of bicarbonate (HCO¬¬¬¬¬3¬) free CO2, which results in a higher amount of free CO2 ¬being made available for uptake by submerged macrophytes. Moreover, Takahashi and Asaeda (2012) have reported the role of temperature on submerged macrophyte biomass accumulation, which states that the physical attributes such as temperature have the capacity to affect chemical parameters such as dissolved oxygen, where higher water temperatures may lead to a decreased ability of gases to remain in solution (Takahashi & Asaeda 2012) 
 
@@ -506,7 +506,7 @@ de Moor FC, Day J. 2013. Aquatic biodiversity in the mediterranean region of Sou
 
 Dudgeon D, Arthington AH, Gessner MO, Kawabata ZI, Knowler DJ, Lévêque C, Naiman RJ, Prieur-Richard AH, Soto D, Stiassny ML Sullivan CA. 2006. Freshwater biodiversity: importance, threats, status and conservation challenges. *Biological review* 81: 163–182.
 
-Garrow C, Marr S. 2012. Swimming on the edge of extinction. The perilous state of the indigenous freshwater.
+Garrow C, Marr S. 2012. Swimming on the edge of extinction. The perilous state of the indigenous freshwater. *BioScience* 54: 76–85.
 
 Gleick PH. 1996. Basic water requirements for human activities: meeting basic needs. *Water international* 21: 83–92.
 
@@ -514,7 +514,7 @@ Goldblatt P, Manning JC. 2002. Plant diversity of the Cape region of southern Af
 
 Hudon C, Lalonde S, Gagnon P. 2000. Ranking the effects of site exposure, plant growth form, water depth, and transparency on aquatic plant biomass. *Canadian Journal of Fisheries and Aquatic Sciences* 57(S1): 31–42.
 
-Junk WJ, Piedade MTF. 1993. Biomass and primary-production of herbaceous plant communities in the Amazon floodplain. *Hydrobiologia*, 263(3):155–162. 
+Junk WJ, Piedade MTF. 1993. Biomass and primary-production of herbaceous plant communities in the Amazon floodplain. *Hydrobiologia*, 263(3): 155–162. 
 
 Kaul S. 1982. Community architecture biomass and production in some typical wetlands of Kashmir. *Indian journal of ecology* 54: 767–775.
 
@@ -540,7 +540,7 @@ Tshiila AA. 2014. Isolepis. Available at www.pza.sanbi.org/isolepis [accessed 29
 
 Vié JC. 2008. The IUCN Red list: a key conservation tool. In W: Vié JC, Hilton-Taylor C & SN Stuart (Eds.), The 2008 Review of The IUCN Red list of Threatened Species (pp 1–6). Gland, Switzerland: IUCN.  
 
-van Ginkel CE, Glen RP, Gordon-Gray KD, Cilliers CJ, Muasya M, Van Deventer PP. 2011. Easy identification of some South African wetland plants (grasses, restios, sedges, rushes, bulrushes, eriocaulons and yellow-eyed grasses). Water Research Commission, Pretoria. pp 110.
+van Ginkel CE, Glen RP, Gordon-Gray KD, Cilliers CJ, Muasya M, Van Deventer PP. 2011. Easy identification of some South African wetland plants (grasses, restios, sedges, rushes, bulrushes, eriocaulons and yellow-eyed grasses). Water Research Commission, Pretoria. *Journal of Ecology and The Natural Environment* 4(1): 10–15.
 
 Wersal RM, Madsen JD, McMillan BR, Gerard PD. 2006. Environmental factors affecting biomass and distribution of Stuckenia pectinata in the Heron Lake System, Minnesota, USA. *Hydrobiologia* 26: 313–321.
 
