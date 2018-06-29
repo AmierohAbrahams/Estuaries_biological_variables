@@ -541,3 +541,39 @@ Vié JC (2008). The IUCN Red list: a key conservation tool. In W: Vié JC, Hilto
 van Ginkel CE, Glen RP, Gordon-Gray KD, Cilliers CJ, Muasya M, Van Deventer PP (2011). Easy identification of some South African wetland plants (grasses, restios, sedges, rushes, bulrushes, eriocaulons and yellow-eyed grasses). Water Research Commission, Pretoria. pp 110.
 
 Wersal RM, Madsen JD, McMillan BR, Gerard PD (2006). Environmental factors affecting biomass and distribution of Stuckenia pectinata in the Heron Lake System, Minnesota, USA. *Hydrobiologia* 26: 313–321.
+
+ Acknowledgements 
+
+All collaborators have contributed equally to the report. The data repository can be found at https://github.com/AmierohAbrahams/R_assignment
+
+
+# Appendix I - Figures 
+
+```{r}
+plot(new1)
+```
+
+```{r}
+Final
+```
+
+```{r}
+combined1
+```
+
+
+# Appendix II - Tables 
+
+```{r}
+Table 1
+```
+
+```{r}
+Table 2
+```
+
+
+```{r}
+Table 3
+```
+
